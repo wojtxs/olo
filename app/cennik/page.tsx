@@ -1,214 +1,105 @@
-"use client";
-
-import * as React from "react";
+import type { Metadata } from "next";
+import { ViewTransition } from "react";
 import Link from "next/link";
-import { motion, useReducedMotion, useInView } from "framer-motion";
-import { ArrowLeft, Clock, Phone, ArrowRight } from "lucide-react";
-import { Button } from "@/app/components/ui/button";
+import { contact, meta, pricing } from "@/app/content";
+import { ArrowLeft, ArrowRight } from "@/app/components/icons";
 
-const easeCinematic = [0.22, 1, 0.36, 1] as const;
-const easeSoft = [0.25, 1, 0.5, 1] as const;
-
-const categories = [
-  {
-    title: "Plecy, barki i kark",
-    services: [
-      { name: "Masaż relaksacyjny pleców, barków i karku", duration: "60 min", price: "180 zł" },
-      { name: "Masaż relaksacyjny pleców i karku", duration: "45 min", price: "150 zł" },
-      { name: "Masaż relaksacyjny pleców", duration: "30 min", price: "100 zł" },
-      { name: "Masaż relaksacyjny rąk i barków", duration: "45 min", price: "120 zł" },
-    ],
-  },
-  {
-    title: "Nogi i całe ciało",
-    services: [
-      { name: "Masaż relaksacyjny całego ciała", duration: "90 min", price: "240 zł" },
-      { name: "Masaż relaksacyjny nogi+plecy", duration: "60 min", price: "150 zł" },
-      { name: "Masaż relaksacyjny stóp i łydek", duration: "45 min", price: "150 zł" },
-      { name: "Masaż relaksacyjny nóg", duration: "45 min", price: "120 zł" },
-      { name: "Masaż dostawowy", duration: "30 min", price: "80 zł" },
-    ],
-  },
-  {
-    title: "Twarz",
-    services: [
-      { name: "Zabieg kobido complex (masaż+lifting)", duration: "90 min", price: "250 zł" },
-      { name: "Masaż kobido", duration: "60 min", price: "220 zł" },
-    ],
-  },
-];
-
-function PriceRow({
-  service,
-  index,
-}: {
-  service: (typeof categories)[0]["services"][0];
-  index: number;
-}) {
-  const shouldReduceMotion = useReducedMotion();
-  const isMotionEnabled = !shouldReduceMotion;
-  const ref = React.useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={isMotionEnabled ? { opacity: 0, y: 12 } : false}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-      transition={{ duration: 0.8, ease: easeCinematic, delay: index * 0.1 }}
-      className="group flex flex-col gap-1 border-b border-[#2a302a]/60 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
-    >
-      <span className="text-base font-medium text-[#f0eee9] sm:text-lg">
-        {service.name}
-      </span>
-      <div className="flex items-center gap-6">
-        <span className="flex items-center gap-2 text-sm text-[#9ca394]">
-          <Clock className="h-4 w-4 text-[#8a9a7a]" strokeWidth={1.5} />
-          {service.duration}
-        </span>
-        <span className="min-w-[5rem] text-right font-serif text-xl font-light text-[#f0eee9]">
-          {service.price}
-        </span>
-      </div>
-    </motion.div>
-  );
-}
+export const metadata: Metadata = {
+  title: meta.pricingTitle,
+  description: meta.description,
+  alternates: { canonical: "/cennik" },
+  openGraph: { title: meta.pricingTitle, description: meta.description, url: "/cennik" },
+};
 
 export default function CennikPage() {
-  const shouldReduceMotion = useReducedMotion();
-  const isMotionEnabled = !shouldReduceMotion;
-  const headerRef = React.useRef<HTMLDivElement>(null);
-  const isHeaderInView = useInView(headerRef, { once: true, margin: "-100px" });
-
-  const lineVariants = {
-    hidden: { opacity: 0, y: 40, filter: "blur(6px)" },
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: { duration: 1.4, ease: easeSoft },
-    },
-  };
-
-  const fadeUpVariants = {
-    hidden: { opacity: 0, y: 24 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 1.2, ease: easeCinematic },
-    },
-  };
-
   return (
-    <main className="relative min-h-screen w-full overflow-hidden bg-[#0f1411] pb-20 pt-24 lg:pb-28 lg:pt-32">
-      {/* Background glow */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-        <div className="absolute -left-[10%] top-[5%] h-[30rem] w-[30rem] rounded-full bg-[#8a9a7a]/8 blur-[8rem]" />
-        <div className="absolute bottom-[10%] right-[5%] h-[25rem] w-[25rem] rounded-full bg-[#6b8a72]/6 blur-[6rem]" />
-      </div>
-
-      <div className="relative z-10 mx-auto max-w-[90rem] px-6 lg:px-12">
-        {/* Back link */}
-        <motion.div
-          initial={isMotionEnabled ? "hidden" : false}
-          animate={isHeaderInView ? "visible" : "hidden"}
-          variants={fadeUpVariants}
+    <ViewTransition
+      enter={{ "nav-forward": "page-fade", "nav-back": "page-fade", default: "none" }}
+      exit={{ "nav-forward": "page-fade", "nav-back": "page-fade", default: "none" }}
+      default="none"
+    >
+      <div className="container-site pb-24 pt-8 lg:pb-40 lg:pt-14">
+        <Link
+          href="/"
+          transitionTypes={["nav-back"]}
+          className="group inline-flex min-h-11 items-center gap-3 text-small text-kamien transition-colors hover:text-orzech"
         >
-          <Link
-            href="/"
-            className="group inline-flex items-center gap-2 text-sm font-light text-[#9ca394] transition-colors duration-300 hover:text-[#f0eee9]"
-          >
-            <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" strokeWidth={1.5} />
-            Powrót na stronę główną
-          </Link>
-        </motion.div>
+          <ArrowLeft className="transition-transform duration-300 group-hover:-translate-x-1" />
+          {pricing.back}
+        </Link>
 
-        {/* Header */}
-        <div ref={headerRef} className="mx-auto mt-10 max-w-2xl text-center lg:mt-14">
-          <motion.span
-            className="mb-5 inline-block text-[11px] font-medium uppercase tracking-[0.25em] text-[#8a9a7a]"
-            initial={isMotionEnabled ? "hidden" : false}
-            animate={isHeaderInView ? "visible" : "hidden"}
-            variants={fadeUpVariants}
-          >
-            Oferta
-          </motion.span>
-
-          <h1 className="font-serif text-[#f0eee9]">
-            <motion.span
-              className="block text-[clamp(2.5rem,6vw,5rem)] font-light leading-[0.95] tracking-[-0.02em]"
-              initial={isMotionEnabled ? "hidden" : false}
-              animate={isHeaderInView ? "visible" : "hidden"}
-              variants={lineVariants}
-              transition={{ delay: 0.2 }}
-            >
-              Cennik
-            </motion.span>
-          </h1>
-
-          <motion.p
-            className="mt-6 text-base font-light leading-relaxed text-[#9ca394] lg:text-lg"
-            initial={isMotionEnabled ? "hidden" : false}
-            animate={isHeaderInView ? "visible" : "hidden"}
-            variants={fadeUpVariants}
-            transition={{ delay: 0.5 }}
-          >
-            Dziękuję za zainteresowanie moimi usługami. Poniżej znajdziesz szczegółowy cennik wszystkich zabiegów.
-          </motion.p>
-        </div>
-
-        {/* Price list */}
-        <div className="mx-auto mt-16 max-w-3xl lg:mt-24">
-          {categories.map((category, ci) => {
-            return (
-              <motion.div
-                key={category.title}
-                className="mb-14 lg:mb-20"
-                initial={isMotionEnabled ? { opacity: 0, y: 20 } : false}
-                animate={isHeaderInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.9, ease: easeCinematic, delay: ci * 0.15 }}
-              >
-                <div className="mb-6 flex items-center gap-4">
-                  <span className="h-px flex-1 bg-[#2a302a]" />
-                  <span className="text-xs font-medium uppercase tracking-[0.2em] text-[#8a9a7a]">
-                    {category.title}
-                  </span>
-                  <span className="h-px flex-1 bg-[#2a302a]" />
-                </div>
-
-                <div className="rounded-2xl border border-[#2a302a] bg-[#131813] px-5 py-2 sm:px-8 sm:py-4">
-                  {category.services.map((service, si) => (
-                    <PriceRow key={service.name} service={service} index={si} />
-                  ))}
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* CTA */}
-        <motion.div
-          className="mx-auto mt-6 flex max-w-xl flex-col items-center gap-6 text-center"
-          initial={isMotionEnabled ? "hidden" : false}
-          animate={isHeaderInView ? "visible" : "hidden"}
-          variants={fadeUpVariants}
-          transition={{ delay: 0.9 }}
-        >
-          <p className="text-base font-light text-[#9ca394]">
-            Masz pytania lub chcesz umówić wizytę?
-          </p>
-          <div className="flex w-full flex-col gap-3 sm:flex-row sm:justify-center">
-            <Button href="tel:+48692094577" size="lg" className="group">
-              <Phone className="h-4 w-4" strokeWidth={1.5} />
-              692 094 577
-              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </Button>
-            <Button href="/#kontakt" variant="outline" size="lg">
-              Formularz kontaktowy
-            </Button>
+        <header className="mt-10 grid grid-cols-1 gap-8 lg:mt-16 lg:grid-cols-12 lg:items-end">
+          <div className="lg:col-span-6">
+            <p className="eyebrow">{pricing.eyebrow}</p>
+            <h1 className="font-display mt-6 text-hero">{pricing.title}</h1>
           </div>
-        </motion.div>
+          <p className="max-w-[40ch] text-lead leading-[1.5] text-kamien lg:col-span-5 lg:col-start-8">{pricing.lead}</p>
+        </header>
+
+        <nav
+          aria-label={pricing.title}
+          className="sticky top-0 z-30 -mx-[var(--gutter)] mt-14 overflow-x-auto bg-len/95 px-[var(--gutter)] py-3 backdrop-blur-sm lg:mt-20"
+        >
+          <ul className="flex gap-2">
+            {pricing.categories.map((category) => (
+              <li key={category.slug} className="shrink-0">
+                <a
+                  href={`#${category.slug}`}
+                  className="inline-flex min-h-11 items-center rounded-full border border-orzech/25 px-4 text-small transition-colors hover:border-orzech hover:bg-orzech hover:text-recznik"
+                >
+                  {category.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="mt-6 border-t border-orzech">
+          {pricing.categories.map((category) => (
+            <section
+              key={category.slug}
+              id={category.slug}
+              aria-labelledby={`${category.slug}-title`}
+              className="grid grid-cols-1 scroll-mt-36 gap-6 border-b border-linia py-12 lg:grid-cols-12 lg:gap-8 lg:py-20"
+            >
+              <div className="lg:col-span-4">
+                <ViewTransition name={`kategoria-${category.slug}`} share="morph">
+                  <h2 id={`${category.slug}-title`} className="font-display text-h3 leading-[1] lg:sticky lg:top-40">
+                    {category.title}
+                  </h2>
+                </ViewTransition>
+              </div>
+              <ul className="lg:col-span-7 lg:col-start-6">
+                {category.services.map((service) => (
+                  <li
+                    key={service.id}
+                    className="grid grid-cols-[1fr_auto] items-baseline gap-x-6 gap-y-1 border-b border-linia py-5 first:pt-0 last:border-b-0 sm:grid-cols-[1fr_auto_auto]"
+                  >
+                    <span className="text-lead leading-snug">{service.name}</span>
+                    <span className="tabular order-3 col-span-2 text-small text-kamien sm:order-none sm:col-span-1">
+                      {service.duration}
+                    </span>
+                    <span className="font-soft tabular min-w-[4.5rem] text-right text-h4">{service.price}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
+
+        <div className="mt-20 grid grid-cols-1 gap-8 lg:mt-28 lg:grid-cols-12 lg:items-end">
+          <p className="font-display text-h3 leading-[1.05] lg:col-span-6">{pricing.outro}</p>
+          <div className="flex flex-wrap gap-4 lg:col-span-5 lg:col-start-8 lg:justify-end">
+            <a href={contact.phoneHref} className="btn btn-primary tabular">
+              {contact.phoneDisplay}
+              <ArrowRight className="btn-arrow" />
+            </a>
+            <Link href="/#kontakt" transitionTypes={["nav-back"]} className="btn btn-outline">
+              {pricing.contactButton}
+            </Link>
+          </div>
+        </div>
       </div>
-    </main>
+    </ViewTransition>
   );
 }

@@ -1,45 +1,408 @@
 @import "tailwindcss";
 
+/* Len i orzech — paleta i skala typograficzna */
 :root {
-  --background: #0f1411;
-  --foreground: #f0eee9;
-  --accent: #8a9a7a;
-  --accent-hover: #a3b092;
-  --muted: #9ca394;
-  --surface: #1a1f1c;
-  --border: #2a302a;
+  --len: #eee7db;
+  --recznik: #f7f2ea;
+  --piasek-jasny: #e4d9c8;
+  --orzech: #241c17;
+  --orzech-2: #2e241e;
+  --kamien: #6b5e54;
+  --glina: #9a4e31;
+  --glina-ciemna: #7e3f27;
+  --olej: #d9a35f;
+  --piasek: #b8a99a;
+  --linia: #d8cdbd;
+  --linia-ciemna: #4a3c33;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --gutter: 1rem;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --gutter: 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  :root {
+    --gutter: 3rem;
+  }
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-accent: var(--accent);
-  --color-accent-hover: var(--accent-hover);
-  --color-muted: var(--muted);
-  --color-surface: var(--surface);
-  --color-border: var(--border);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-serif: var(--font-cormorant);
-}
+  --color-len: var(--len);
+  --color-recznik: var(--recznik);
+  --color-piasek-jasny: var(--piasek-jasny);
+  --color-orzech: var(--orzech);
+  --color-orzech-2: var(--orzech-2);
+  --color-kamien: var(--kamien);
+  --color-glina: var(--glina);
+  --color-glina-ciemna: var(--glina-ciemna);
+  --color-olej: var(--olej);
+  --color-piasek: var(--piasek);
+  --color-linia: var(--linia);
+  --color-linia-ciemna: var(--linia-ciemna);
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  --font-sans: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
+
+  /* Skala płynna, ~1.25 na telefonie, ~1.333 na desktopie */
+  --text-micro: 0.75rem;
+  --text-small: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
+  --text-body: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --text-lead: clamp(1.1875rem, 1.1rem + 0.4vw, 1.4375rem);
+  --text-h4: clamp(1.375rem, 1.25rem + 0.6vw, 1.75rem);
+  --text-h3: clamp(1.75rem, 1.5rem + 1.2vw, 2.625rem);
+  --text-h2: clamp(2.5rem, 1.9rem + 3vw, 5.25rem);
+  --text-hero: clamp(3.5rem, 2.1rem + 7vw, 9.5rem);
+  --text-giant: clamp(4.5rem, 2rem + 12vw, 15rem);
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--len);
+  /* Delikatne ziarno — faktura lnu zamiast płaskiego koloru */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.14 0 0 0 0 0.11 0 0 0 0 0.09 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  color: var(--orzech);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--olej);
+  color: var(--orzech);
+}
+
+:focus-visible {
+  outline: 2px solid var(--glina);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.on-dark :focus-visible {
+  outline-color: var(--olej);
+}
+
+/* Typografia */
+.font-display {
+  font-family: var(--font-serif);
+  font-variation-settings: "SOFT" 100, "WONK" 0;
+  font-optical-sizing: auto;
+  font-weight: 340;
+  letter-spacing: -0.022em;
+  line-height: 0.92;
+}
+.font-display em,
+.font-display .italic,
+.font-soft .italic {
+  font-family: var(--font-fraunces-italic), var(--font-fraunces), Georgia, serif;
+  font-style: italic;
+  font-weight: 300;
+}
+.font-soft {
+  font-family: var(--font-serif);
+  font-variation-settings: "SOFT" 100, "WONK" 0;
+  font-optical-sizing: auto;
+}
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-micro);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--glina);
+}
+.on-dark .eyebrow {
+  color: var(--olej);
+}
+.tabular {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.container-site {
+  width: 100%;
+  max-width: 90rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Przyciski: miękkie „wciśnięcie” zamiast skakania */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 3.25rem;
+  padding: 0 1.75rem;
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: var(--text-body);
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    background-color 300ms var(--ease-out-soft),
+    color 300ms var(--ease-out-soft),
+    border-color 300ms var(--ease-out-soft),
+    transform 200ms var(--ease-out-soft);
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn-primary {
+  background: var(--glina);
+  color: var(--recznik);
+}
+.btn-primary:hover {
+  background: var(--glina-ciemna);
+}
+.btn-outline {
+  border: 1px solid var(--orzech);
+  color: var(--orzech);
+}
+.btn-outline:hover {
+  background: var(--orzech);
+  color: var(--recznik);
+}
+.on-dark .btn-primary {
+  background: var(--olej);
+  color: var(--orzech);
+}
+.on-dark .btn-primary:hover {
+  background: var(--recznik);
+}
+.btn .btn-arrow {
+  transition: transform 300ms var(--ease-out-soft);
+}
+.btn:hover .btn-arrow,
+.link-arrow:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+/* Podkreślenie, które „rozlewa się” jak olejek */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 2px;
+  transition: background-size 400ms var(--ease-out-soft);
+}
+.link-underline:hover {
+  background-size: 0% 1px;
+  background-position: 100% 100%;
+}
+
+/* FAQ: natywny <details> z płynnym otwieraniem */
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+}
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.faq-item .faq-icon {
+  transition: transform 400ms var(--ease-out-soft);
+}
+.faq-item[open] .faq-icon {
+  transform: rotate(45deg);
+}
+@supports (interpolate-size: allow-keywords) {
+  .faq-list {
+    interpolate-size: allow-keywords;
+  }
+  .faq-item::details-content {
+    height: 0;
+    overflow: clip;
+    transition:
+      height 500ms var(--ease-out-soft),
+      content-visibility 500ms allow-discrete;
+  }
+  .faq-item[open]::details-content {
+    height: auto;
+  }
+}
+
+/* Mapa napięć */
+.zone {
+  fill: var(--piasek-jasny);
+  stroke: var(--kamien);
+  stroke-width: 1.25;
+  cursor: pointer;
+  transition:
+    fill 300ms var(--ease-out-soft),
+    stroke 300ms var(--ease-out-soft);
+}
+.zone:hover {
+  fill: #ecc795;
+}
+.zone[data-active="true"] {
+  fill: var(--olej);
+  stroke: var(--glina-ciemna);
+}
+.zone-static {
+  fill: var(--recznik);
+  stroke: var(--kamien);
+  stroke-width: 1.25;
+}
+
+/* Ruch sterowany scrollem — tylko gdy przeglądarka to wspiera i użytkownik nie prosi o mniej ruchu */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 25%;
+    }
+    .unfold {
+      animation: unfold linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 35%;
+    }
+    .unfold > * {
+      animation: settle linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 50%;
+    }
+    .process-steps {
+      view-timeline: --steps block;
+    }
+    .process-fill {
+      animation: fill-line linear both;
+      animation-timeline: --steps;
+      animation-range: entry 40% exit 40%;
+    }
+    .process-dot {
+      animation: dot-on linear both;
+      animation-timeline: view();
+      animation-range: cover 30% cover 45%;
+    }
+    .site-header {
+      animation: header-line linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 160px;
+    }
+  }
+
+  @keyframes reveal {
+    from {
+      opacity: 0;
+      translate: 0 2rem;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+  /* Zdjęcie rozwija się jak rozkładany ręcznik */
+  @keyframes unfold {
+    from {
+      clip-path: inset(0 0 22% 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+  @keyframes settle {
+    from {
+      scale: 1.08;
+    }
+    to {
+      scale: 1;
+    }
+  }
+  @keyframes fill-line {
+    from {
+      scale: 1 0;
+    }
+    to {
+      scale: 1 1;
+    }
+  }
+  @keyframes dot-on {
+    from {
+      background-color: var(--orzech);
+      scale: 0.6;
+    }
+    to {
+      background-color: var(--olej);
+      scale: 1;
+    }
+  }
+  @keyframes header-line {
+    from {
+      box-shadow: 0 1px 0 transparent;
+    }
+    to {
+      box-shadow: 0 1px 0 var(--linia);
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  }
+}
+
+/* Przejścia między / a /cennik */
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+::view-transition-group(.morph) {
+  animation-duration: 550ms;
+  animation-timing-function: var(--ease-out-soft);
+}
+::view-transition-old(.page-fade) {
+  animation: 200ms ease-in both vt-fade reverse;
+}
+::view-transition-new(.page-fade) {
+  animation: 420ms var(--ease-out-soft) 120ms both vt-fade, 520ms var(--ease-out-soft) both vt-rise;
+}
+@keyframes vt-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes vt-rise {
+  from {
+    translate: 0 14px;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
   }
 }

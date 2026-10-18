@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aleksander Pawłowski — mobilny masażysta
 
-## Getting Started
-
-First, run the development server:
+Statyczna strona w Next.js 16 (App Router). Obie trasy (`/` i `/cennik`) są prerenderowane przy buildzie, bez backendu.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev     # podgląd lokalny
+npm run build   # build produkcyjny (oba widoki jako statyczny HTML)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Struktura
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `app/content.ts` — cała treść strony w jednym miejscu (teksty 1:1 z wersji sprzed redesignu).
+- `app/components/` — sekcje i małe wyspy JS: menu, sticky pasek „Zadzwoń / Napisz”, mapa napięć, wideo w hero.
+- `app/fonts/` — przycięte fonty Fraunces i Schibsted Grotesk (licencja SIL OFL 1.1, pliki `OFL-*.txt`).
+- `public/images`, `public/video` — zdjęcia (źródła dla `next/image`, które serwuje AVIF/WebP) i pętla wideo do hero (MP4 + WebM).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Skrypty
 
-## Learn More
+- `node scripts/verify-content.mjs` — po `npm run build` sprawdza, czy każdy tekst z wersji sprzed redesignu jest na stronie.
+- `node scripts/build-map.mjs` — odświeża mapę dojazdu z danych OpenStreetMap (`app/components/map-data.ts`).
+- `python scripts/make-fonts.py <źródła> app/fonts` — ponownie przycina fonty (wymaga `fonttools` i `brotli`).
 
-To learn more about Next.js, take a look at the following resources:
+## Opinie klientów
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Komponent `app/components/testimonials.tsx` jest gotowy, ale nie jest wyświetlany. Gdy będą prawdziwe opinie (za zgodą klientów), dodaj `<Testimonials />` w `app/page.tsx`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Adres strony
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Ustaw `NEXT_PUBLIC_SITE_URL` (np. po podpięciu domeny), żeby canonical, Open Graph i schema.org wskazywały właściwy adres. Bez tej zmiennej używana jest domena produkcyjna projektu na Vercelu.
