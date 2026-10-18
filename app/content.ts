@@ -102,8 +102,8 @@ export const offer = {
         "Pełen relaks dla zmęczonych nóg lub całego ciała. Dostosowane do Twoich potrzeb – od celowanego masażu stóp i łydek, przez nogi z plecami, aż po 90-minutowy relaks całego ciała.",
       features: ["całe ciało", "nogi + plecy", "stopy i łydki", "masaż dostawowy"],
       image: {
-        src: "/images/stol-gotowy.jpg",
-        alt: "Rozłożony stół do masażu z lnianym prześcieradłem i złożonym ręcznikiem w słonecznym salonie",
+        src: "/images/c/recznik.jpg",
+        alt: "Zwinięty bawełniany ręcznik na brzoskwiniowym lnianym prześcieradle stołu do masażu",
       },
     },
     {

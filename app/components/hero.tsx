@@ -1,55 +1,59 @@
-import { getImageProps } from "next/image";
+import Image from "next/image";
 import { cta, hero } from "@/app/content";
 import { ArrowRight } from "@/app/components/icons";
 import { HeroVideo } from "@/app/components/hero-video";
-
-const alt = "Kobieta leżąca na stole do masażu w słonecznym salonie z parkietem, przykryta lnianym prześcieradłem";
+import { TensionLine } from "@/app/components/tension-line";
 
 export function Hero() {
-  const common = { alt, quality: 70, sizes: "(min-width: 1024px) 50vw, 100vw" };
-  const {
-    props: { srcSet: desktopSrcSet },
-  } = getImageProps({ ...common, src: "/images/hero.jpg", width: 2400, height: 1590 });
-  const { props: mobileProps } = getImageProps({
-    ...common,
-    src: "/images/hero-mobile.jpg",
-    width: 1200,
-    height: 1500,
-    loading: "eager",
-    fetchPriority: "high",
-  });
-
   return (
-    <section aria-labelledby="hero-title" className="lg:grid lg:min-h-[min(calc(100dvh-5rem),62rem)] lg:grid-cols-2">
-      <div className="flex flex-col justify-center px-[var(--gutter)] pb-12 pt-8 lg:py-20 lg:pl-[max(var(--gutter),calc((100vw-90rem)/2+var(--gutter)))] lg:pr-12">
-        <p className="eyebrow">{hero.eyebrow}</p>
-        <h1 id="hero-title" className="font-display mt-6 text-hero lg:text-[min(7.2vw,8.75rem)]">
-          <span className="block">{hero.titleLines[0]}</span>
-          <span className="block pl-[0.9em] italic text-kamien">{hero.titleLines[1]}</span>
-          <span className="block">{hero.titleLines[2]}</span>
-        </h1>
-        <p className="mt-8 max-w-[36ch] text-lead leading-[1.5] text-kamien lg:mt-10">{hero.lead}</p>
-        <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-5" data-hero-cta>
-          <a href="#kontakt" className="btn btn-primary">
-            {cta.book}
-            <ArrowRight className="btn-arrow" />
-          </a>
-          <a href="#oferta" className="link-underline text-orzech">
-            {hero.secondaryLink}
-          </a>
+    <section aria-labelledby="hero-title" className="relative overflow-hidden pb-16 lg:pb-24">
+      <div className="container-site grid grid-cols-1 pt-6 lg:grid-cols-12 lg:gap-x-8 lg:pt-10">
+        <div className="lg:col-span-7 lg:row-start-1">
+          <p className="tag">{hero.eyebrow}</p>
+          <h1 id="hero-title" className="headline mt-6 max-w-[14ch] text-hero">
+            {hero.titleLines[0]} {hero.titleLines[1]} <span className="text-cegla">{hero.titleLines[2]}</span>
+          </h1>
         </div>
-      </div>
 
-      <div className="relative ml-[var(--gutter)] aspect-[4/5] overflow-hidden bg-piasek-jasny sm:aspect-[5/4] lg:ml-0 lg:aspect-auto lg:h-full">
-        <picture>
-          <source media="(min-width: 640px)" srcSet={desktopSrcSet} sizes={common.sizes} />
-          {/* eslint-disable-next-line jsx-a11y/alt-text -- alt jest w mobileProps */}
-          <img {...mobileProps} className="absolute inset-0 h-full w-full object-cover object-[50%_45%]" />
-        </picture>
-        <HeroVideo
-          mobile={{ mp4: "/video/hero-mobile.mp4", webm: "/video/hero-mobile.webm" }}
-          desktop={{ mp4: "/video/hero-desktop.mp4", webm: "/video/hero-desktop.webm" }}
+        {/* Jedna linia przez całą stronę: tu jest najbardziej spięta i puszcza przy przewijaniu.
+            Na desktopie przecina też zdjęcie — napięcie przechodzi przez ciało. */}
+        <TensionLine
+          hero
+          from={1}
+          to={0.62}
+          height={180}
+          seed={3}
+          className="-mx-[var(--gutter)] my-6 h-24 lg:pointer-events-none lg:absolute lg:inset-x-0 lg:top-[44%] lg:z-10 lg:mx-0 lg:my-0 lg:h-44"
         />
+
+        <div className="lg:col-span-6 lg:row-start-2 lg:self-end lg:pt-56">
+          <p className="max-w-[36ch] text-lead text-mut">{hero.lead}</p>
+          <div className="mt-8 flex flex-wrap items-center gap-3" data-hero-cta>
+            <a href="#kontakt" className="btn btn-primary">
+              {cta.book}
+              <ArrowRight className="btn-arrow" />
+            </a>
+            <a href="#oferta" className="btn btn-soft">
+              {hero.secondaryLink}
+            </a>
+          </div>
+        </div>
+
+        <div className="relative mt-10 aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-skora-2 sm:aspect-[4/3] lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1 lg:mt-0 lg:aspect-[4/5] lg:self-center">
+          <Image
+            src="/images/c/bark-mobile.jpg"
+            alt="Zbliżenie rozluźnionego barku z kroplami złotego olejku do masażu na skórze"
+            fill
+            quality={70}
+            preload
+            sizes="(min-width: 1024px) 38vw, 100vw"
+            className="object-cover"
+          />
+          <HeroVideo
+            mobile={{ mp4: "/video/hero-c-mobile.mp4", webm: "/video/hero-c-mobile.webm" }}
+            desktop={{ mp4: "/video/hero-c-hd.mp4", webm: "/video/hero-c-hd.webm" }}
+          />
+        </div>
       </div>
     </section>
   );

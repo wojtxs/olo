@@ -10,7 +10,6 @@ export function Header() {
   const menuRef = React.useRef<HTMLDivElement>(null);
   const toggleRef = React.useRef<HTMLButtonElement>(null);
 
-  // Chowa się przy przewijaniu w dół, wraca przy przewijaniu w górę.
   React.useEffect(() => {
     let lastY = window.scrollY;
     let ticking = false;
@@ -50,32 +49,28 @@ export function Header() {
   return (
     <>
       <header
-        className="site-header sticky top-0 z-50 bg-len transition-transform duration-500 ease-[var(--ease-out-soft)] data-[hidden=true]:-translate-y-full"
+        className="site-header sticky top-0 z-50 bg-skora transition-transform duration-500 ease-[var(--ease-calm)] data-[hidden=true]:-translate-y-full"
         data-hidden={hidden && !open}
         style={{ viewTransitionName: "site-header" }}
       >
-        <div className="container-site flex h-16 items-center justify-between lg:h-20">
-          <Link href="/" className="group flex flex-col leading-none" onClick={close}>
-            <span className="font-soft text-[1.3125rem] tracking-[-0.01em] text-orzech lg:text-[1.5rem]">
-              {brand.name}
-            </span>
-            <span className="mt-1 text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-kamien">
-              {brand.role}
-            </span>
+        <div className="container-site flex h-16 items-center justify-between gap-6 lg:h-[4.5rem]">
+          <Link href="/" prefetch={false} className="flex flex-col leading-tight" onClick={close}>
+            <span className="text-[1.125rem] font-semibold tracking-[-0.02em]">{brand.name}</span>
+            <span className="text-[0.8125rem] text-mut">{brand.role}</span>
           </Link>
 
-          <nav className="hidden items-center gap-9 lg:flex" aria-label="Nawigacja główna">
+          <nav className="hidden items-center gap-1 lg:flex" aria-label="Nawigacja główna">
             {nav.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 prefetch={false}
-                className="text-small text-orzech transition-colors hover:text-glina"
+                className="rounded-full px-4 py-2 text-small font-medium transition-colors hover:bg-skora-2"
               >
                 {link.label}
               </Link>
             ))}
-            <Link href="/#kontakt" prefetch={false} className="btn btn-primary min-h-11 px-6 text-small">
+            <Link href="/#kontakt" prefetch={false} className="btn btn-primary ml-3 min-h-11 px-5 text-small">
               {cta.book}
             </Link>
           </nav>
@@ -87,49 +82,43 @@ export function Header() {
             aria-expanded={open}
             aria-controls="menu-mobilne"
             aria-label={open ? ui.closeMenu : ui.openMenu}
-            className="-mr-2 grid h-11 w-11 place-items-center lg:hidden"
+            className="grid h-11 w-11 place-items-center rounded-full bg-skora-2 lg:hidden"
           >
-            <span className="relative block h-3 w-7" aria-hidden="true">
-              <span
-                className={`absolute left-0 block h-px w-7 bg-orzech transition-transform duration-300 ${open ? "top-1.5 rotate-[20deg]" : "top-0"}`}
-              />
-              <span
-                className={`absolute left-0 block h-px bg-orzech transition-all duration-300 ${open ? "top-1.5 w-7 -rotate-[20deg]" : "top-3 w-5"}`}
-              />
-            </span>
+            <svg width="22" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true">
+              {open ? (
+                <path d="M4 1l14 12M18 1L4 13" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+              ) : (
+                <path d="M1 4c3.5-3 6.5 3 10 0s6.5-3 10 0M1 11c3.5-2 6.5 2 10 0s6.5-2 10 0" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+              )}
+            </svg>
           </button>
         </div>
       </header>
 
-      <div
-        id="menu-mobilne"
-        ref={menuRef}
-        hidden={!open}
-        className="fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto bg-len lg:hidden"
-      >
-        <nav className="container-site flex min-h-full flex-col pb-10 pt-8" aria-label="Nawigacja mobilna">
-          <ul className="flex flex-col">
-            {nav.map((link, i) => (
-              <li key={link.href} className="border-b border-linia">
+      <div id="menu-mobilne" ref={menuRef} hidden={!open} className="fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto bg-skora lg:hidden">
+        <nav className="container-site flex min-h-full flex-col pb-10 pt-6" aria-label="Nawigacja mobilna">
+          <ul className="flex flex-col gap-2">
+            {nav.map((link) => (
+              <li key={link.href}>
                 <Link
                   href={link.href}
+                  prefetch={false}
                   onClick={close}
-                  className="flex items-baseline gap-4 py-4 font-display text-[2.5rem] text-orzech"
+                  className="headline block rounded-[1.5rem] bg-skora-2 px-5 py-4 text-[2rem]"
                 >
-                  <span className="font-sans text-micro tabular text-kamien">0{i + 1}</span>
                   {link.label}
                 </Link>
               </li>
             ))}
           </ul>
           <div className="mt-auto flex flex-col gap-3 pt-10">
-            <a href={contact.phoneHref} className="font-display text-[2rem] text-orzech">
+            <a href={contact.phoneHref} className="headline tabular text-[2.25rem]">
               {contact.phoneDisplay}
             </a>
-            <a href={contact.emailHref} className="text-small text-kamien">
+            <a href={contact.emailHref} className="text-mut">
               {contact.email}
             </a>
-            <Link href="/#kontakt" prefetch={false} onClick={close} className="btn btn-primary mt-4 self-start">
+            <Link href="/#kontakt" prefetch={false} onClick={close} className="btn btn-primary mt-3 self-start">
               {cta.book}
             </Link>
           </div>

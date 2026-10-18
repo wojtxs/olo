@@ -1,83 +1,97 @@
 import { ViewTransition } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { cta, offer } from "@/app/content";
+import { cta, offer, pricing } from "@/app/content";
 import { ArrowRight } from "@/app/components/icons";
-import { BodyMap } from "@/app/components/body-map";
+import { TensionLine } from "@/app/components/tension-line";
 
 export function Offer() {
   return (
-    <section id="oferta" aria-labelledby="oferta-title" className="bg-recznik py-24 lg:py-40">
-      <div className="container-site">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
-          <div className="lg:col-span-6">
-            <p className="eyebrow">{offer.eyebrow}</p>
-            <h2 id="oferta-title" className="font-display mt-6 text-h2">
-              <span className="block">{offer.titleLines[0]}</span>
-              <span className="block pl-[0.6em] italic">{offer.titleLines[1]}</span>
+    <section id="oferta" aria-labelledby="oferta-title" className="bg-skora-2 pb-20 lg:pb-32">
+      <TensionLine from={0.62} to={0.5} seed={5} className="h-24 lg:h-32" />
+      <div className="container-site pt-10 lg:pt-14">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-end lg:gap-8">
+          <div className="lg:col-span-7">
+            <p className="tag">{offer.eyebrow}</p>
+            <h2 id="oferta-title" className="headline mt-5 text-h2">
+              {offer.titleLines[0]} {offer.titleLines[1]}
             </h2>
           </div>
-          <p className="max-w-[42ch] text-lead leading-[1.5] text-kamien lg:col-span-5 lg:col-start-8">{offer.lead}</p>
+          <p className="max-w-[42ch] text-lead text-mut lg:col-span-5">{offer.lead}</p>
         </div>
 
-        <div className="mt-20 flex flex-col gap-24 lg:mt-32 lg:gap-40">
+        {/* Karty układają się jedna na drugiej jak złożone ręczniki (na desktopie) */}
+        <div className="mt-12 flex flex-col gap-6 lg:mt-16 lg:gap-10">
           {offer.categories.map((category, i) => {
-            const flip = i % 2 === 1;
+            const services = pricing.categories.find((c) => c.slug === category.slug)?.services ?? [];
             return (
-              <article key={category.slug} className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-center lg:gap-8">
-                <div
-                  className={`unfold relative aspect-[4/5] w-[88%] overflow-hidden bg-piasek-jasny lg:w-full ${
-                    flip ? "ml-auto lg:col-span-5 lg:col-start-8" : "lg:col-span-5"
-                  }`}
-                >
-                  <Image
-                    src={category.image.src}
-                    alt={category.image.alt}
-                    fill
-                    quality={70}
-                    sizes="(min-width: 1024px) 38vw, 88vw"
-                    className="object-cover"
-                  />
-                </div>
-                <div className={flip ? "lg:col-span-5 lg:col-start-2 lg:row-start-1" : "lg:col-span-5 lg:col-start-7"}>
-                  <span className="tabular text-small text-glina">0{i + 1}</span>
-                  <ViewTransition name={`kategoria-${category.slug}`} share="morph">
-                    <h3 className="font-display mt-3 text-h3 leading-[1]">{category.title}</h3>
-                  </ViewTransition>
-                  <p className="mt-6 max-w-[48ch] text-kamien">{category.description}</p>
-                  <ul className="mt-8 grid grid-cols-1 border-t border-linia sm:grid-cols-2 sm:gap-x-8">
-                    {category.features.map((feature) => (
-                      <li key={feature} className="flex items-center gap-3 border-b border-linia py-3 text-small">
-                        <span className="h-px w-4 bg-glina" aria-hidden="true" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <Link
-                    href={`/cennik#${category.slug}`}
-                    transitionTypes={["nav-forward"]}
-                    className="link-arrow mt-8 inline-flex min-h-11 items-center gap-3 font-medium text-glina"
-                    aria-label={`${cta.details}: ${category.title}`}
-                  >
-                    {cta.details}
-                    <ArrowRight className="btn-arrow" />
-                  </Link>
+              <article
+                key={category.slug}
+                className="rounded-[2.25rem] bg-skora p-3 shadow-[0_-24px_48px_-36px_rgba(61,21,19,0.45)] sm:p-4 lg:sticky lg:p-5"
+                style={{ top: `calc(5.5rem + ${i * 1.5}rem)` }}
+              >
+                <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-10">
+                  <div className="soften relative aspect-[4/3] overflow-hidden rounded-[1.75rem] bg-skora-2 lg:col-span-5 lg:aspect-auto lg:min-h-[30rem]">
+                    <Image
+                      src={category.image.src}
+                      alt={category.image.alt}
+                      fill
+                      quality={70}
+                      sizes="(min-width: 1024px) 38vw, 100vw"
+                      className="object-cover"
+                    />
+                  </div>
+
+                  <div className="flex flex-col px-2 pb-3 sm:px-3 lg:col-span-7 lg:py-4 lg:pr-6">
+                    <div className="flex items-center gap-3">
+                      <span className="tabular grid h-9 w-9 place-items-center rounded-full bg-cegla text-small font-semibold text-skora">
+                        {i + 1}
+                      </span>
+                      <ViewTransition name={`kategoria-${category.slug}`} share="morph">
+                        <h3 className="headline text-h3">{category.title}</h3>
+                      </ViewTransition>
+                    </div>
+                    <p className="mt-5 max-w-[52ch] text-lead text-mut">{category.description}</p>
+                    <ul className="mt-5 flex flex-wrap gap-2">
+                      {category.features.map((feature) => (
+                        <li key={feature} className="tag bg-skora-2">
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                    <ul className="mt-6 border-t border-linia">
+                      {services.map((service) => (
+                        <li key={service.id} className="grid grid-cols-[1fr_auto] items-baseline gap-x-4 border-b border-linia py-3">
+                          <span>{service.name}</span>
+                          <span className="tabular whitespace-nowrap text-right">
+                            <span className="mr-3 text-small text-mut">{service.duration}</span>
+                            <span className="text-[1.25rem] font-semibold">{service.price}</span>
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                    <Link
+                      href={`/cennik#${category.slug}`}
+                      transitionTypes={["nav-forward"]}
+                      className="link-arrow mt-6 inline-flex min-h-11 items-center gap-3 self-start font-semibold text-cegla"
+                      aria-label={`${cta.details}: ${category.title}`}
+                    >
+                      {cta.details}
+                      <ArrowRight className="btn-arrow" />
+                    </Link>
+                  </div>
                 </div>
               </article>
             );
           })}
         </div>
 
-        <div className="mt-28 lg:mt-40">
-          <BodyMap />
-        </div>
-
-        <div className="mt-20 flex flex-wrap items-center gap-4 lg:mt-28">
+        <div className="mt-12 flex flex-wrap items-center gap-3 lg:mt-16">
           <Link href="/cennik" transitionTypes={["nav-forward"]} className="btn btn-primary">
             {cta.fullPricing}
             <ArrowRight className="btn-arrow" />
           </Link>
-          <a href="#kontakt" className="btn btn-outline">
+          <a href="#kontakt" className="btn btn-soft bg-skora">
             {cta.book}
           </a>
         </div>

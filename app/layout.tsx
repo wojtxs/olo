@@ -9,26 +9,11 @@ import { meta, ui } from "@/app/content";
 import { businessSchema } from "@/app/lib/schema";
 import { siteUrl } from "@/app/lib/site";
 
-// Fonty przycięte do znaków łacińskich z polskimi; w Fraunces osie SOFT=100 i WONK=0
-// są przypięte na stałe, zostaje grubość 300–420 i rozmiar optyczny. Generuje je scripts/make-fonts.py.
-const fraunces = localFont({
-  src: [{ path: "./fonts/Fraunces-Soft-Roman.woff2", weight: "300 420", style: "normal" }],
-  variable: "--font-fraunces",
-  display: "swap",
-  fallback: ["Georgia", "serif"],
-});
-
-const frauncesItalic = localFont({
-  src: [{ path: "./fonts/Fraunces-Soft-Italic.woff2", weight: "300 420", style: "italic" }],
-  variable: "--font-fraunces-italic",
-  display: "swap",
-  preload: false,
-  fallback: ["Georgia", "serif"],
-});
-
-const schibsted = localFont({
-  src: [{ path: "./fonts/SchibstedGrotesk.woff2", weight: "400 600", style: "normal" }],
-  variable: "--font-schibsted",
+// Bricolage Grotesque przycięty do polskich znaków (scripts/make-fonts.py):
+// rozmiar optyczny 12–96 zostaje, więc nagłówki i tekst biorą z jednego pliku.
+const bricolage = localFont({
+  src: [{ path: "./fonts/Bricolage.woff2", weight: "300 700", style: "normal" }],
+  variable: "--font-bricolage",
   display: "swap",
   fallback: ["Arial", "sans-serif"],
 });
@@ -43,13 +28,13 @@ export const metadata: Metadata = {
     locale: "pl_PL",
     title: meta.title,
     description: meta.description,
-    images: [{ url: "/images/og.jpg", width: 1200, height: 630, alt: "Stół do masażu rozłożony w słonecznym salonie" }],
+    images: [{ url: "/images/og.jpg", width: 1200, height: 630, alt: "Zbliżenie barku z kroplami olejku do masażu" }],
   },
   twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#eee7db",
+  themeColor: "#f7e6da",
 };
 
 export default function RootLayout({
@@ -58,11 +43,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pl" className={`${fraunces.variable} ${frauncesItalic.variable} ${schibsted.variable}`}>
-      <body className="min-h-dvh pb-[calc(4rem+env(safe-area-inset-bottom))] lg:pb-0">
+    <html lang="pl" className={bricolage.variable}>
+      <body className="min-h-dvh pb-[calc(4.5rem+env(safe-area-inset-bottom))] lg:pb-0">
         <a
           href="#tresc"
-          className="sr-only z-[60] rounded-full bg-orzech px-5 py-3 text-recznik focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+          className="sr-only z-[60] rounded-full bg-wino px-5 py-3 text-skora focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
         >
           {ui.skipToContent}
         </a>

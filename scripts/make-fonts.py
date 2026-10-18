@@ -30,9 +30,9 @@ UNICODES = (
 FEATURES = ["kern", "liga", "clig", "calt", "locl", "lnum", "tnum", "pnum", "case", "mark", "mkmk", "ccmp"]
 
 JOBS = [
-    ("Fraunces-Roman.ttf", "Fraunces-Soft-Roman.woff2", {"SOFT": 100, "WONK": 0, "wght": (300, 420)}),
-    ("Fraunces-Italic.ttf", "Fraunces-Soft-Italic.woff2", {"SOFT": 100, "WONK": 0, "wght": (300, 420)}),
-    ("SchibstedGrotesk.ttf", "SchibstedGrotesk.woff2", {"wght": (400, 600)}),
+    # Jedna rodzina: rozmiar optyczny 12–96 zostaje (charakter w nagłówkach, spokój w tekście),
+    # szerokość przypięta na 100, grubości 300–700.
+    ("BricolageGrotesque.ttf", "Bricolage.woff2", {"wdth": 100, "wght": (300, 700)}),
 ]
 
 for src, dst, axes in JOBS:

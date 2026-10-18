@@ -61,7 +61,7 @@ export function HeroVideo({ mobile, desktop }: { mobile: Sources; desktop: Sourc
     <>
       <video
         ref={videoRef}
-        className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-[1600ms] ease-[var(--ease-out-soft)] data-[playing=true]:opacity-100"
+        className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-[1600ms] ease-[var(--ease-calm)] data-[playing=true]:opacity-100"
         data-playing={playing}
         muted
         loop
@@ -79,7 +79,7 @@ export function HeroVideo({ mobile, desktop }: { mobile: Sources; desktop: Sourc
         onClick={toggle}
         aria-label={userPaused ? ui.playVideo : ui.pauseVideo}
         aria-pressed={userPaused}
-        className="absolute bottom-4 right-4 z-10 grid h-11 w-11 place-items-center rounded-full bg-len/85 text-orzech transition-colors hover:bg-recznik"
+        className="absolute bottom-4 right-4 z-10 grid h-11 w-11 place-items-center rounded-full bg-skora/90 text-wino transition-colors hover:bg-skora"
       >
         {userPaused ? (
           <svg width="12" height="14" viewBox="0 0 12 14" aria-hidden="true">

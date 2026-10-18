@@ -11,7 +11,7 @@ npm run build   # build produkcyjny (oba widoki jako statyczny HTML)
 
 - `app/content.ts` — cała treść strony w jednym miejscu (teksty 1:1 z wersji sprzed redesignu).
 - `app/components/` — sekcje i małe wyspy JS: menu, sticky pasek „Zadzwoń / Napisz”, mapa napięć, wideo w hero.
-- `app/fonts/` — przycięte fonty Fraunces i Schibsted Grotesk (licencja SIL OFL 1.1, pliki `OFL-*.txt`).
+- `app/fonts/` — przycięty font Bricolage Grotesque (licencja SIL OFL 1.1, plik `OFL-BricolageGrotesque.txt`).
 - `public/images`, `public/video` — zdjęcia (źródła dla `next/image`, które serwuje AVIF/WebP) i pętla wideo do hero (MP4 + WebM).
 
 ## Skrypty

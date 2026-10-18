@@ -1,55 +1,53 @@
 import { contact, contactSection } from "@/app/content";
 import { AreaMap } from "@/app/components/area-map";
 import { ArrowRight } from "@/app/components/icons";
+import { TensionLine } from "@/app/components/tension-line";
 
 export function Contact() {
   return (
-    <section id="kontakt" aria-labelledby="kontakt-title" className="bg-recznik py-24 lg:py-40">
-      <div className="container-site">
-        <p className="eyebrow">{contactSection.eyebrow}</p>
-        <h2 id="kontakt-title" className="font-display mt-6 text-[clamp(2.75rem,0.6rem+9.6vw,10.5rem)] leading-[0.88]">
+    <section id="kontakt" aria-labelledby="kontakt-title" className="on-dark bg-wino pb-20 text-skora lg:pb-28">
+      <TensionLine from={0.025} to={0.01} seed={17} className="h-16 lg:h-24" />
+      <div className="container-site pt-10 lg:pt-14">
+        <p className="tag">{contactSection.eyebrow}</p>
+        <h2 id="kontakt-title" className="headline mt-5 text-[clamp(2.5rem,0.5rem+10vw,11rem)]">
           {contactSection.title}
         </h2>
 
-        <div className="mt-10 grid grid-cols-1 gap-8 lg:mt-14 lg:grid-cols-12">
-          <p className="max-w-[40ch] text-lead leading-[1.5] text-kamien lg:col-span-6">{contactSection.lead}</p>
-          <ul className="flex flex-wrap items-start gap-x-6 gap-y-2 lg:col-span-5 lg:col-start-8 lg:justify-end lg:pt-2">
-            {contactSection.pills.map((pill) => (
-              <li key={pill} className="flex items-center gap-3 text-micro font-medium uppercase tracking-[0.16em] text-orzech">
-                <span className="h-1.5 w-1.5 rounded-full bg-olej" aria-hidden="true" />
-                {pill}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <div className="mt-10 grid grid-cols-1 gap-10 lg:mt-14 lg:grid-cols-12 lg:gap-8">
+          <div className="lg:col-span-6">
+            <p className="max-w-[40ch] text-lead text-mut-jasny">{contactSection.lead}</p>
+            <ul className="mt-6 flex flex-wrap gap-2">
+              {contactSection.pills.map((pill) => (
+                <li key={pill} className="tag">
+                  <span className="h-1.5 w-1.5 rounded-full bg-miod" aria-hidden="true" />
+                  {pill}
+                </li>
+              ))}
+            </ul>
 
-        <div className="mt-16 grid grid-cols-1 gap-14 lg:mt-24 lg:grid-cols-12 lg:gap-8">
-          <div className="border-t border-orzech lg:col-span-6">
-            <a href={contact.phoneHref} className="group flex items-end justify-between gap-6 border-b border-linia py-8">
-              <span>
-                <span className="eyebrow block">{contactSection.labels.phone}</span>
-                <span className="font-display tabular mt-4 block text-[clamp(2.5rem,1.6rem+4vw,4.75rem)] transition-colors group-hover:text-glina">
-                  {contact.phoneDisplay}
+            <div className="mt-10 flex flex-col gap-3">
+              <a href={contact.phoneHref} className="group flex items-center justify-between gap-4 rounded-[1.75rem] bg-miod px-6 py-5 text-wino">
+                <span>
+                  <span className="block text-small font-semibold">{contactSection.labels.phone}</span>
+                  <span className="headline tabular mt-1 block text-[clamp(2.25rem,1.5rem+3.5vw,4rem)]">{contact.phoneDisplay}</span>
                 </span>
-              </span>
-              <ArrowRight className="mb-4 shrink-0 text-glina transition-transform duration-300 group-hover:translate-x-1" />
-            </a>
-            <a href={contact.emailHref} className="group flex items-end justify-between gap-6 border-b border-linia py-8">
-              <span className="min-w-0">
-                <span className="eyebrow block">{contactSection.labels.email}</span>
-                <span className="font-soft mt-4 block break-words text-[clamp(1.0625rem,0.75rem+1.4vw,2rem)] transition-colors group-hover:text-glina">
-                  {contact.email}
+                <ArrowRight className="shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
+              </a>
+              <a href={contact.emailHref} className="group flex items-center justify-between gap-4 rounded-[1.75rem] bg-wino-2 px-5 py-5 sm:px-6">
+                <span className="min-w-0">
+                  <span className="block text-small font-semibold text-mut-jasny">{contactSection.labels.email}</span>
+                  <span className="mt-1 block break-words text-[clamp(0.9375rem,0.7rem+1.1vw,1.625rem)] font-semibold">{contact.email}</span>
                 </span>
-              </span>
-              <ArrowRight className="mb-2 shrink-0 text-glina transition-transform duration-300 group-hover:translate-x-1" />
-            </a>
-            <div className="border-b border-linia py-8">
-              <span className="eyebrow block">{contactSection.labels.area}</span>
-              <span className="font-soft mt-4 block text-[clamp(1.25rem,1rem+1.2vw,2rem)]">{contact.area}</span>
+                <ArrowRight className="shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
+              </a>
+              <div className="rounded-[1.75rem] bg-wino-2 px-6 py-5">
+                <span className="block text-small font-semibold text-mut-jasny">{contactSection.labels.area}</span>
+                <span className="mt-1 block text-[clamp(1.25rem,1rem+1vw,1.75rem)] font-semibold">{contact.area}</span>
+              </div>
             </div>
           </div>
 
-          <div className="lg:col-span-5 lg:col-start-8">
+          <div className="lg:col-span-5 lg:col-start-8 lg:self-end">
             <AreaMap />
           </div>
         </div>

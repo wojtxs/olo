@@ -1,21 +1,21 @@
 @import "tailwindcss";
 
-/* Len i orzech — paleta i skala typograficzna */
+/* Napięcie → ulga: ciepło skóry, miód olejku i głębokie wino */
 :root {
-  --len: #eee7db;
-  --recznik: #f7f2ea;
-  --piasek-jasny: #e4d9c8;
-  --orzech: #241c17;
-  --orzech-2: #2e241e;
-  --kamien: #6b5e54;
-  --glina: #9a4e31;
-  --glina-ciemna: #7e3f27;
-  --olej: #d9a35f;
-  --piasek: #b8a99a;
-  --linia: #d8cdbd;
-  --linia-ciemna: #4a3c33;
+  --skora: #f7e6da;
+  --skora-2: #f0d5c3;
+  --brzoskwinia: #e8987a;
+  --miod: #e9a94b;
+  --cegla: #a3392a;
+  --cegla-ciemna: #8e2f22;
+  --wino: #3d1513;
+  --wino-2: #5a211c;
+  --mut: #7a4a40;
+  --mut-jasny: #d9b8a8;
+  --linia: rgba(61, 21, 19, 0.14);
+  --linia-jasna: rgba(247, 230, 218, 0.18);
 
-  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-calm: cubic-bezier(0.25, 1, 0.5, 1);
   --gutter: 1rem;
 }
 
@@ -31,32 +31,28 @@
 }
 
 @theme inline {
-  --color-len: var(--len);
-  --color-recznik: var(--recznik);
-  --color-piasek-jasny: var(--piasek-jasny);
-  --color-orzech: var(--orzech);
-  --color-orzech-2: var(--orzech-2);
-  --color-kamien: var(--kamien);
-  --color-glina: var(--glina);
-  --color-glina-ciemna: var(--glina-ciemna);
-  --color-olej: var(--olej);
-  --color-piasek: var(--piasek);
+  --color-skora: var(--skora);
+  --color-skora-2: var(--skora-2);
+  --color-brzoskwinia: var(--brzoskwinia);
+  --color-miod: var(--miod);
+  --color-cegla: var(--cegla);
+  --color-cegla-ciemna: var(--cegla-ciemna);
+  --color-wino: var(--wino);
+  --color-wino-2: var(--wino-2);
+  --color-mut: var(--mut);
+  --color-mut-jasny: var(--mut-jasny);
   --color-linia: var(--linia);
-  --color-linia-ciemna: var(--linia-ciemna);
+  --color-linia-jasna: var(--linia-jasna);
 
-  --font-sans: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
 
-  /* Skala płynna, ~1.25 na telefonie, ~1.333 na desktopie */
-  --text-micro: 0.75rem;
   --text-small: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
   --text-body: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
-  --text-lead: clamp(1.1875rem, 1.1rem + 0.4vw, 1.4375rem);
-  --text-h4: clamp(1.375rem, 1.25rem + 0.6vw, 1.75rem);
-  --text-h3: clamp(1.75rem, 1.5rem + 1.2vw, 2.625rem);
-  --text-h2: clamp(2.5rem, 1.9rem + 3vw, 5.25rem);
-  --text-hero: clamp(3.5rem, 2.1rem + 7vw, 9.5rem);
-  --text-giant: clamp(4.5rem, 2rem + 12vw, 15rem);
+  --text-lead: clamp(1.125rem, 1.05rem + 0.45vw, 1.4375rem);
+  --text-h4: clamp(1.5rem, 1.3rem + 0.9vw, 2.125rem);
+  --text-h3: clamp(2rem, 1.6rem + 2vw, 3.5rem);
+  --text-h2: clamp(2.75rem, 1.8rem + 4.6vw, 6.5rem);
+  --text-hero: clamp(3.5rem, 1.6rem + 10vw, 11rem);
 }
 
 html {
@@ -66,145 +62,136 @@ html {
 }
 
 body {
-  background-color: var(--len);
-  /* Delikatne ziarno — faktura lnu zamiast płaskiego koloru */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.14 0 0 0 0 0.11 0 0 0 0 0.09 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  color: var(--orzech);
+  background: var(--skora);
+  color: var(--wino);
   font-family: var(--font-sans);
   font-size: var(--text-body);
+  font-optical-sizing: auto;
   line-height: 1.6;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
   overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: var(--olej);
-  color: var(--orzech);
+  background: var(--miod);
+  color: var(--wino);
 }
 
 :focus-visible {
-  outline: 2px solid var(--glina);
+  outline: 2px solid var(--cegla);
   outline-offset: 3px;
-  border-radius: 2px;
+  border-radius: 6px;
 }
 .on-dark :focus-visible {
-  outline-color: var(--olej);
+  outline-color: var(--miod);
 }
 
 /* Klasy komponentów w warstwie, żeby utilities Tailwinda mogły je nadpisywać */
 @layer components {
-  /* Typografia */
-  .font-display {
-    font-family: var(--font-serif);
-    font-variation-settings: "SOFT" 100, "WONK" 0;
-    font-optical-sizing: auto;
-    font-weight: 340;
-    letter-spacing: -0.022em;
-    line-height: 0.92;
-  }
-  .font-display em,
-  .font-display .italic,
-  .font-soft .italic {
-    font-family: var(--font-fraunces-italic), var(--font-fraunces), Georgia, serif;
-    font-style: italic;
-    font-weight: 300;
-  }
-  .font-soft {
-    font-family: var(--font-serif);
-    font-variation-settings: "SOFT" 100, "WONK" 0;
-    font-optical-sizing: auto;
-  }
-  .eyebrow {
-    font-family: var(--font-sans);
-    font-size: var(--text-micro);
+  /* Nagłówki: miękki grotesk z dużym rozmiarem optycznym, ciasno, bez wersalików */
+  .headline {
     font-weight: 500;
-    letter-spacing: 0.22em;
-    line-height: 1.2;
-    text-transform: uppercase;
-    color: var(--glina);
+    letter-spacing: -0.035em;
+    line-height: 0.95;
+    text-wrap: balance;
   }
-  .on-dark .eyebrow {
-    color: var(--olej);
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid var(--linia);
+    border-radius: 999px;
+    padding: 0.375rem 0.875rem;
+    font-size: var(--text-small);
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  .on-dark .tag {
+    border-color: var(--linia-jasna);
   }
   .tabular {
     font-variant-numeric: tabular-nums lining-nums;
   }
-  
+
   .container-site {
     width: 100%;
-    max-width: 90rem;
+    max-width: 92rem;
     margin-inline: auto;
     padding-inline: var(--gutter);
   }
-  
-  /* Przyciski: miękkie „wciśnięcie” zamiast skakania */
+
+  /* Przyciski: miękkie pigułki, które lekko „uginają się” pod palcem */
   .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
-    min-height: 3.25rem;
+    min-height: 3.375rem;
     padding: 0 1.75rem;
     border-radius: 999px;
-    font-weight: 500;
     font-size: var(--text-body);
+    font-weight: 600;
     line-height: 1;
     white-space: nowrap;
     transition:
-      background-color 300ms var(--ease-out-soft),
-      color 300ms var(--ease-out-soft),
-      border-color 300ms var(--ease-out-soft),
-      transform 200ms var(--ease-out-soft);
+      background-color 300ms var(--ease-calm),
+      color 300ms var(--ease-calm),
+      transform 300ms var(--ease-calm);
   }
   .btn:active {
-    transform: scale(0.97);
+    transform: scale(0.96);
   }
   .btn-primary {
-    background: var(--glina);
-    color: var(--recznik);
+    background: var(--cegla);
+    color: var(--skora);
   }
   .btn-primary:hover {
-    background: var(--glina-ciemna);
+    background: var(--cegla-ciemna);
   }
-  .btn-outline {
-    border: 1px solid var(--orzech);
-    color: var(--orzech);
+  .btn-soft {
+    background: var(--skora-2);
+    color: var(--wino);
   }
-  .btn-outline:hover {
-    background: var(--orzech);
-    color: var(--recznik);
+  .btn-soft:hover {
+    background: var(--brzoskwinia);
   }
   .on-dark .btn-primary {
-    background: var(--olej);
-    color: var(--orzech);
+    background: var(--miod);
+    color: var(--wino);
   }
   .on-dark .btn-primary:hover {
-    background: var(--recznik);
+    background: var(--skora);
   }
-  .btn .btn-arrow {
-    transition: transform 300ms var(--ease-out-soft);
+  .on-dark .btn-soft {
+    background: var(--wino-2);
+    color: var(--skora);
+  }
+  .on-dark .btn-soft:hover {
+    background: var(--brzoskwinia);
+    color: var(--wino);
+  }
+  .btn .btn-arrow,
+  .link-arrow .btn-arrow {
+    transition: transform 350ms var(--ease-calm);
   }
   .btn:hover .btn-arrow,
   .link-arrow:hover .btn-arrow {
     transform: translateX(4px);
   }
-  
-  /* Podkreślenie, które „rozlewa się” jak olejek */
-  .link-underline {
-    background-image: linear-gradient(currentColor, currentColor);
-    background-size: 100% 1px;
-    background-position: 0 100%;
-    background-repeat: no-repeat;
-    padding-bottom: 2px;
-    transition: background-size 400ms var(--ease-out-soft);
+
+  /* Linia napięcia */
+  .tension-path {
+    fill: none;
+    stroke: var(--line-color, var(--cegla));
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
-  .link-underline:hover {
-    background-size: 0% 1px;
-    background-position: 100% 100%;
+  .on-dark .tension-path {
+    --line-color: var(--miod);
   }
-  
-  /* FAQ: natywny <details> z płynnym otwieraniem */
+
+  /* FAQ: natywny details w miękkich kartach */
   .faq-item summary {
     list-style: none;
     cursor: pointer;
@@ -213,140 +200,129 @@ body {
     display: none;
   }
   .faq-item .faq-icon {
-    transition: transform 400ms var(--ease-out-soft);
+    transition:
+      transform 450ms var(--ease-calm),
+      background-color 300ms var(--ease-calm);
   }
   .faq-item[open] .faq-icon {
     transform: rotate(45deg);
+    background: var(--cegla);
+    color: var(--skora);
   }
-  @supports (interpolate-size: allow-keywords) {
-    .faq-list {
-      interpolate-size: allow-keywords;
-    }
-    .faq-item::details-content {
-      height: 0;
-      overflow: clip;
-      transition:
-        height 500ms var(--ease-out-soft),
-        content-visibility 500ms allow-discrete;
-    }
-    .faq-item[open]::details-content {
-      height: auto;
-    }
-  }
-  
+
   /* Mapa napięć */
   .zone {
-    fill: var(--piasek-jasny);
-    stroke: var(--kamien);
+    fill: rgba(247, 230, 218, 0.08);
+    stroke: var(--mut-jasny);
     stroke-width: 1.25;
     cursor: pointer;
-    transition:
-      fill 300ms var(--ease-out-soft),
-      stroke 300ms var(--ease-out-soft);
+    transition: fill 300ms var(--ease-calm);
   }
   .zone:hover {
-    fill: #ecc795;
+    fill: rgba(232, 152, 122, 0.45);
   }
   .zone[data-active="true"] {
-    fill: var(--olej);
-    stroke: var(--glina-ciemna);
+    fill: var(--brzoskwinia);
+    stroke: var(--skora);
   }
   .zone-static {
-    fill: var(--recznik);
-    stroke: var(--kamien);
-    stroke-width: 1.25;
+    fill: rgba(247, 230, 218, 0.04);
+    stroke: rgba(217, 184, 168, 0.6);
+    stroke-width: 1;
   }
 }
 
-/* Ruch sterowany scrollem — tylko gdy przeglądarka to wspiera i użytkownik nie prosi o mniej ruchu */
+@supports (interpolate-size: allow-keywords) {
+  .faq-list {
+    interpolate-size: allow-keywords;
+  }
+  .faq-item::details-content {
+    height: 0;
+    overflow: clip;
+    transition:
+      height 500ms var(--ease-calm),
+      content-visibility 500ms allow-discrete;
+  }
+  .faq-item[open]::details-content {
+    height: auto;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
-    .reveal {
-      animation: reveal linear both;
+    /* Każdy odcinek linii rozluźnia się, gdy przejeżdża przez ekran */
+    .tension {
+      view-timeline: --tension block;
+    }
+    .tension-path {
+      animation: relax linear both;
+      animation-timeline: --tension;
+      animation-range: entry 10% cover 55%;
+    }
+    /* W hero linia puszcza w miarę przewijania pierwszego ekranu */
+    .tension-hero .tension-path {
+      animation-timeline: scroll(root);
+      animation-range: 0 75vh;
+    }
+    @keyframes relax {
+      from {
+        d: var(--d-from);
+      }
+      to {
+        d: var(--d-to);
+      }
+    }
+
+    .rise {
+      animation: rise linear both;
       animation-timeline: view();
       animation-range: entry 0% cover 25%;
     }
-    .unfold {
-      animation: unfold linear both;
+    @keyframes rise {
+      from {
+        opacity: 0;
+        translate: 0 1.75rem;
+      }
+      to {
+        opacity: 1;
+        translate: 0 0;
+      }
+    }
+    /* Zdjęcia wynurzają się miękko, jak ciało spod ręcznika */
+    .soften {
+      animation: soften linear both;
       animation-timeline: view();
       animation-range: entry 0% cover 35%;
     }
-    .unfold > * {
-      animation: settle linear both;
+    @keyframes soften {
+      from {
+        clip-path: inset(8% 6% 8% 6% round 3rem);
+      }
+      to {
+        clip-path: inset(0 0 0 0 round 2rem);
+      }
+    }
+    .process-draw {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation: draw linear both;
       animation-timeline: view();
-      animation-range: entry 0% cover 50%;
+      animation-range: entry 20% cover 60%;
     }
-    .process-steps {
-      view-timeline: --steps block;
-    }
-    .process-fill {
-      animation: fill-line linear both;
-      animation-timeline: --steps;
-      animation-range: entry 40% exit 40%;
-    }
-    .process-dot {
-      animation: dot-on linear both;
-      animation-timeline: view();
-      animation-range: cover 30% cover 45%;
+    @keyframes draw {
+      to {
+        stroke-dashoffset: 0;
+      }
     }
     .site-header {
       animation: header-line linear both;
       animation-timeline: scroll(root);
-      animation-range: 0 160px;
+      animation-range: 0 140px;
     }
-  }
-
-  @keyframes reveal {
-    from {
-      opacity: 0;
-      translate: 0 2rem;
-    }
-    to {
-      opacity: 1;
-      translate: 0 0;
-    }
-  }
-  /* Zdjęcie rozwija się jak rozkładany ręcznik */
-  @keyframes unfold {
-    from {
-      clip-path: inset(0 0 22% 0);
-    }
-    to {
-      clip-path: inset(0 0 0 0);
-    }
-  }
-  @keyframes settle {
-    from {
-      scale: 1.08;
-    }
-    to {
-      scale: 1;
-    }
-  }
-  @keyframes fill-line {
-    from {
-      scale: 1 0;
-    }
-    to {
-      scale: 1 1;
-    }
-  }
-  @keyframes dot-on {
-    from {
-      background-color: var(--orzech);
-      scale: 0.6;
-    }
-    to {
-      background-color: var(--olej);
-      scale: 1;
-    }
-  }
-  @keyframes header-line {
-    from {
-      box-shadow: 0 1px 0 transparent;
-    }
-    to {
-      box-shadow: 0 1px 0 var(--linia);
+    @keyframes header-line {
+      to {
+        box-shadow: 0 1px 0 var(--linia);
+      }
     }
   }
 }
@@ -376,14 +352,14 @@ body {
   animation: none;
 }
 ::view-transition-group(.morph) {
-  animation-duration: 550ms;
-  animation-timing-function: var(--ease-out-soft);
+  animation-duration: 600ms;
+  animation-timing-function: var(--ease-calm);
 }
 ::view-transition-old(.page-fade) {
-  animation: 200ms ease-in both vt-fade reverse;
+  animation: 220ms ease-in both vt-fade reverse;
 }
 ::view-transition-new(.page-fade) {
-  animation: 420ms var(--ease-out-soft) 120ms both vt-fade, 520ms var(--ease-out-soft) both vt-rise;
+  animation: 480ms var(--ease-calm) 120ms both vt-fade;
 }
 @keyframes vt-fade {
   from {
@@ -391,14 +367,6 @@ body {
   }
   to {
     opacity: 1;
-  }
-}
-@keyframes vt-rise {
-  from {
-    translate: 0 14px;
-  }
-  to {
-    translate: 0 0;
   }
 }
 @media (prefers-reduced-motion: reduce) {
