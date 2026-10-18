@@ -92,167 +92,170 @@ body {
   outline-color: var(--olej);
 }
 
-/* Typografia */
-.font-display {
-  font-family: var(--font-serif);
-  font-variation-settings: "SOFT" 100, "WONK" 0;
-  font-optical-sizing: auto;
-  font-weight: 340;
-  letter-spacing: -0.022em;
-  line-height: 0.92;
-}
-.font-display em,
-.font-display .italic,
-.font-soft .italic {
-  font-family: var(--font-fraunces-italic), var(--font-fraunces), Georgia, serif;
-  font-style: italic;
-  font-weight: 300;
-}
-.font-soft {
-  font-family: var(--font-serif);
-  font-variation-settings: "SOFT" 100, "WONK" 0;
-  font-optical-sizing: auto;
-}
-.eyebrow {
-  font-family: var(--font-sans);
-  font-size: var(--text-micro);
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  line-height: 1.2;
-  text-transform: uppercase;
-  color: var(--glina);
-}
-.on-dark .eyebrow {
-  color: var(--olej);
-}
-.tabular {
-  font-variant-numeric: tabular-nums lining-nums;
-}
-
-.container-site {
-  width: 100%;
-  max-width: 90rem;
-  margin-inline: auto;
-  padding-inline: var(--gutter);
-}
-
-/* Przyciski: miękkie „wciśnięcie” zamiast skakania */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  min-height: 3.25rem;
-  padding: 0 1.75rem;
-  border-radius: 999px;
-  font-weight: 500;
-  font-size: var(--text-body);
-  line-height: 1;
-  white-space: nowrap;
-  transition:
-    background-color 300ms var(--ease-out-soft),
-    color 300ms var(--ease-out-soft),
-    border-color 300ms var(--ease-out-soft),
-    transform 200ms var(--ease-out-soft);
-}
-.btn:active {
-  transform: scale(0.97);
-}
-.btn-primary {
-  background: var(--glina);
-  color: var(--recznik);
-}
-.btn-primary:hover {
-  background: var(--glina-ciemna);
-}
-.btn-outline {
-  border: 1px solid var(--orzech);
-  color: var(--orzech);
-}
-.btn-outline:hover {
-  background: var(--orzech);
-  color: var(--recznik);
-}
-.on-dark .btn-primary {
-  background: var(--olej);
-  color: var(--orzech);
-}
-.on-dark .btn-primary:hover {
-  background: var(--recznik);
-}
-.btn .btn-arrow {
-  transition: transform 300ms var(--ease-out-soft);
-}
-.btn:hover .btn-arrow,
-.link-arrow:hover .btn-arrow {
-  transform: translateX(4px);
-}
-
-/* Podkreślenie, które „rozlewa się” jak olejek */
-.link-underline {
-  background-image: linear-gradient(currentColor, currentColor);
-  background-size: 100% 1px;
-  background-position: 0 100%;
-  background-repeat: no-repeat;
-  padding-bottom: 2px;
-  transition: background-size 400ms var(--ease-out-soft);
-}
-.link-underline:hover {
-  background-size: 0% 1px;
-  background-position: 100% 100%;
-}
-
-/* FAQ: natywny <details> z płynnym otwieraniem */
-.faq-item summary {
-  list-style: none;
-  cursor: pointer;
-}
-.faq-item summary::-webkit-details-marker {
-  display: none;
-}
-.faq-item .faq-icon {
-  transition: transform 400ms var(--ease-out-soft);
-}
-.faq-item[open] .faq-icon {
-  transform: rotate(45deg);
-}
-@supports (interpolate-size: allow-keywords) {
-  .faq-list {
-    interpolate-size: allow-keywords;
+/* Klasy komponentów w warstwie, żeby utilities Tailwinda mogły je nadpisywać */
+@layer components {
+  /* Typografia */
+  .font-display {
+    font-family: var(--font-serif);
+    font-variation-settings: "SOFT" 100, "WONK" 0;
+    font-optical-sizing: auto;
+    font-weight: 340;
+    letter-spacing: -0.022em;
+    line-height: 0.92;
   }
-  .faq-item::details-content {
-    height: 0;
-    overflow: clip;
+  .font-display em,
+  .font-display .italic,
+  .font-soft .italic {
+    font-family: var(--font-fraunces-italic), var(--font-fraunces), Georgia, serif;
+    font-style: italic;
+    font-weight: 300;
+  }
+  .font-soft {
+    font-family: var(--font-serif);
+    font-variation-settings: "SOFT" 100, "WONK" 0;
+    font-optical-sizing: auto;
+  }
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: var(--text-micro);
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: var(--glina);
+  }
+  .on-dark .eyebrow {
+    color: var(--olej);
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+  
+  .container-site {
+    width: 100%;
+    max-width: 90rem;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+  
+  /* Przyciski: miękkie „wciśnięcie” zamiast skakania */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    min-height: 3.25rem;
+    padding: 0 1.75rem;
+    border-radius: 999px;
+    font-weight: 500;
+    font-size: var(--text-body);
+    line-height: 1;
+    white-space: nowrap;
     transition:
-      height 500ms var(--ease-out-soft),
-      content-visibility 500ms allow-discrete;
+      background-color 300ms var(--ease-out-soft),
+      color 300ms var(--ease-out-soft),
+      border-color 300ms var(--ease-out-soft),
+      transform 200ms var(--ease-out-soft);
   }
-  .faq-item[open]::details-content {
-    height: auto;
+  .btn:active {
+    transform: scale(0.97);
   }
-}
-
-/* Mapa napięć */
-.zone {
-  fill: var(--piasek-jasny);
-  stroke: var(--kamien);
-  stroke-width: 1.25;
-  cursor: pointer;
-  transition:
-    fill 300ms var(--ease-out-soft),
-    stroke 300ms var(--ease-out-soft);
-}
-.zone:hover {
-  fill: #ecc795;
-}
-.zone[data-active="true"] {
-  fill: var(--olej);
-  stroke: var(--glina-ciemna);
-}
-.zone-static {
-  fill: var(--recznik);
-  stroke: var(--kamien);
-  stroke-width: 1.25;
+  .btn-primary {
+    background: var(--glina);
+    color: var(--recznik);
+  }
+  .btn-primary:hover {
+    background: var(--glina-ciemna);
+  }
+  .btn-outline {
+    border: 1px solid var(--orzech);
+    color: var(--orzech);
+  }
+  .btn-outline:hover {
+    background: var(--orzech);
+    color: var(--recznik);
+  }
+  .on-dark .btn-primary {
+    background: var(--olej);
+    color: var(--orzech);
+  }
+  .on-dark .btn-primary:hover {
+    background: var(--recznik);
+  }
+  .btn .btn-arrow {
+    transition: transform 300ms var(--ease-out-soft);
+  }
+  .btn:hover .btn-arrow,
+  .link-arrow:hover .btn-arrow {
+    transform: translateX(4px);
+  }
+  
+  /* Podkreślenie, które „rozlewa się” jak olejek */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 100% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    padding-bottom: 2px;
+    transition: background-size 400ms var(--ease-out-soft);
+  }
+  .link-underline:hover {
+    background-size: 0% 1px;
+    background-position: 100% 100%;
+  }
+  
+  /* FAQ: natywny <details> z płynnym otwieraniem */
+  .faq-item summary {
+    list-style: none;
+    cursor: pointer;
+  }
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-item .faq-icon {
+    transition: transform 400ms var(--ease-out-soft);
+  }
+  .faq-item[open] .faq-icon {
+    transform: rotate(45deg);
+  }
+  @supports (interpolate-size: allow-keywords) {
+    .faq-list {
+      interpolate-size: allow-keywords;
+    }
+    .faq-item::details-content {
+      height: 0;
+      overflow: clip;
+      transition:
+        height 500ms var(--ease-out-soft),
+        content-visibility 500ms allow-discrete;
+    }
+    .faq-item[open]::details-content {
+      height: auto;
+    }
+  }
+  
+  /* Mapa napięć */
+  .zone {
+    fill: var(--piasek-jasny);
+    stroke: var(--kamien);
+    stroke-width: 1.25;
+    cursor: pointer;
+    transition:
+      fill 300ms var(--ease-out-soft),
+      stroke 300ms var(--ease-out-soft);
+  }
+  .zone:hover {
+    fill: #ecc795;
+  }
+  .zone[data-active="true"] {
+    fill: var(--olej);
+    stroke: var(--glina-ciemna);
+  }
+  .zone-static {
+    fill: var(--recznik);
+    stroke: var(--kamien);
+    stroke-width: 1.25;
+  }
 }
 
 /* Ruch sterowany scrollem — tylko gdy przeglądarka to wspiera i użytkownik nie prosi o mniej ruchu */
