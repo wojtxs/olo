@@ -211,7 +211,7 @@ export const footer = {
   rights: "Wszelkie prawa zastrzeżone.",
   toTop: "Do góry",
   // Dopisane na prośbę właściciela: podpis wykonawcy w dolnym pasku stopki.
-  credit: { label: "Projekt i wykonanie:", studio: "webexe" },
+  credit: { label: "Projekt i wykonanie:", studio: "webexe", href: "https://webexe.pl" },
 } as const;
 
 export type Service = {

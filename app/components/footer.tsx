@@ -67,7 +67,9 @@ export function Footer() {
           </p>
           <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
             <p>
-              {footer.credit.label} <strong className="font-semibold text-skora">{footer.credit.studio}</strong>
+              {footer.credit.label} <a href={footer.credit.href} target="_blank" rel="noopener" className="font-semibold text-skora underline decoration-1 underline-offset-4 transition-colors hover:text-miod">
+                {footer.credit.studio}
+              </a>
             </p>
             <a href="#" className="group inline-flex items-center gap-3 text-skora hover:text-miod">
               {footer.toTop}
