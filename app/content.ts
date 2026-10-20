@@ -210,6 +210,8 @@ export const footer = {
   contactTitle: "Kontakt",
   rights: "Wszelkie prawa zastrzeżone.",
   toTop: "Do góry",
+  // Dopisane na prośbę właściciela: podpis wykonawcy w dolnym pasku stopki.
+  credit: { label: "Projekt i wykonanie:", studio: "webexe" },
 } as const;
 
 export type Service = {
