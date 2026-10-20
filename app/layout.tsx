@@ -9,13 +9,21 @@ import { meta, ui } from "@/app/content";
 import { businessSchema } from "@/app/lib/schema";
 import { siteUrl } from "@/app/lib/site";
 
-// Bricolage Grotesque przycięty do polskich znaków (scripts/make-fonts.py):
-// rozmiar optyczny 12–96 zostaje, więc nagłówki i tekst biorą z jednego pliku.
-const bricolage = localFont({
-  src: [{ path: "./fonts/Bricolage.woff2", weight: "300 700", style: "normal" }],
-  variable: "--font-bricolage",
+// Fonty przycięte do znaków łacińskich z polskimi (scripts/make-fonts.py):
+// Big Shoulders jako statyczna odmiana display 800 (bez nakładek konturów), Archivo z osią szerokości.
+const bigShoulders = localFont({
+  src: [{ path: "./fonts/BigShoulders-ExtraBold.woff2", weight: "800", style: "normal" }],
+  variable: "--font-big-shoulders",
+  display: "swap",
+  fallback: ["Arial Narrow", "sans-serif"],
+});
+
+const archivo = localFont({
+  src: [{ path: "./fonts/Archivo.woff2", weight: "400 700", style: "normal" }],
+  variable: "--font-archivo",
   display: "swap",
   fallback: ["Arial", "sans-serif"],
+  declarations: [{ prop: "font-stretch", value: "100% 125%" }],
 });
 
 export const metadata: Metadata = {
@@ -28,13 +36,13 @@ export const metadata: Metadata = {
     locale: "pl_PL",
     title: meta.title,
     description: meta.description,
-    images: [{ url: "/images/og.jpg", width: 1200, height: 630, alt: "Zbliżenie barku z kroplami olejku do masażu" }],
+    images: [{ url: "/images/og.jpg", width: 1200, height: 630, alt: "Znak z logo: plecy z kręgosłupem i dłoń, obok napis Aleksander Pawłowski, mobilny masażysta" }],
   },
   twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f7e6da",
+  themeColor: "#1d1d1b",
 };
 
 export default function RootLayout({
@@ -43,11 +51,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pl" className={bricolage.variable}>
-      <body className="min-h-dvh pb-[calc(4.5rem+env(safe-area-inset-bottom))] lg:pb-0">
+    <html lang="pl" className={`${bigShoulders.variable} ${archivo.variable}`}>
+      <body className="min-h-dvh pb-[calc(3.5rem+env(safe-area-inset-bottom))] lg:pb-0">
         <a
           href="#tresc"
-          className="sr-only z-[60] rounded-full bg-wino px-5 py-3 text-skora focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+          className="sr-only z-[60] bg-szafran px-5 py-3 font-bold text-grafit focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
         >
           {ui.skipToContent}
         </a>

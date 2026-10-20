@@ -20,7 +20,7 @@ const KNEE_LINE = 346;
 
 const zoneSide: Partial<Record<ZoneId, Side>> = { twarz: "front", plecy: "back" };
 
-// Mapa napięć: wskazujesz, gdzie boli, i od razu widzisz pasujące zabiegi z cennika.
+// Mapa napięć jako tablica taktyczna: wskazujesz strefę, dostajesz zabiegi z cennika.
 export function BodyMap() {
   const [active, setActive] = React.useState<ZoneId>("kark-barki");
   const [side, setSide] = React.useState<Side>("back");
@@ -42,28 +42,38 @@ export function BodyMap() {
   });
 
   return (
-    <section aria-labelledby="mapa-napiec-title" className="sheet on-dark bg-wino pb-28 text-skora lg:pb-40">
-      <div className="container-site grid grid-cols-1 gap-12 pt-16 lg:grid-cols-12 lg:gap-x-8 lg:gap-y-0 lg:pt-24">
-        <h2 id="mapa-napiec-title" className="headline text-h2 lg:col-span-6 lg:row-start-1">
+    <section aria-labelledby="mapa-napiec-title" className="on-dark relative overflow-hidden bg-grafit py-20 text-kreda lg:py-28">
+      {/* Siatka tablicy taktycznej */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.07]"
+        style={{
+          backgroundImage:
+            "linear-gradient(var(--kreda) 1px, transparent 1px), linear-gradient(90deg, var(--kreda) 1px, transparent 1px)",
+          backgroundSize: "48px 48px",
+        }}
+        aria-hidden="true"
+      />
+      <div className="container-site relative grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-x-8 lg:gap-y-0">
+        <h2 id="mapa-napiec-title" className="display text-[clamp(3rem,1.8rem+6vw,7.5rem)] lg:col-span-6 lg:row-start-1">
           {ui.bodyMap.title}
         </h2>
 
-        <div className="flex flex-col items-center rounded-[2.5rem] bg-wino-2 px-4 py-8 lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1">
-          <div className="flex rounded-full bg-wino p-1" role="group" aria-label={`${ui.bodyMap.front} / ${ui.bodyMap.back}`}>
+        <div className="flex flex-col items-center lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1">
+          <div className="grid grid-cols-2 border-2 border-kreda" role="group" aria-label={`${ui.bodyMap.front} / ${ui.bodyMap.back}`}>
             {(["front", "back"] as const).map((s) => (
               <button
                 key={s}
                 type="button"
                 onClick={() => setSide(s)}
                 aria-pressed={side === s}
-                className="min-h-10 min-w-24 rounded-full px-5 text-small font-medium transition-colors aria-pressed:bg-skora aria-pressed:text-wino"
+                className="label min-h-11 min-w-28 px-5 transition-colors aria-pressed:bg-kreda aria-pressed:text-grafit"
               >
                 {s === "front" ? ui.bodyMap.front : ui.bodyMap.back}
               </button>
             ))}
           </div>
 
-          <svg viewBox="0 0 200 440" className="mt-6 h-[min(60vh,30rem)] w-auto touch-manipulation" aria-hidden="true">
+          <svg viewBox="0 0 200 440" className="mt-8 h-[min(62vh,32rem)] w-auto touch-manipulation" aria-hidden="true">
             <defs>
               <clipPath id={`${uid}-torso`}>
                 <path d={TORSO} />
@@ -80,10 +90,10 @@ export function BodyMap() {
             <g clipPath={`url(#${uid}-legs)`}>
               <rect x="0" y="230" width="200" height={KNEE_LINE - 230} {...zoneProps("nogi")} style={{ stroke: "none" }} />
               <rect x="0" y={KNEE_LINE} width="200" height={440 - KNEE_LINE} {...zoneProps("stopy-lydki")} style={{ stroke: "none" }} />
-              <line x1="0" x2="200" y1={KNEE_LINE} y2={KNEE_LINE} stroke="var(--mut-jasny)" strokeWidth="1" pointerEvents="none" />
+              <line x1="0" x2="200" y1={KNEE_LINE} y2={KNEE_LINE} stroke="var(--kreda)" strokeWidth="1" strokeDasharray="3 3" pointerEvents="none" />
             </g>
-            <path d={LEG_R} fill="none" stroke="var(--mut-jasny)" strokeWidth="1.25" pointerEvents="none" />
-            <path d={LEG_R} transform="matrix(-1 0 0 1 200 0)" fill="none" stroke="var(--mut-jasny)" strokeWidth="1.25" pointerEvents="none" />
+            <path d={LEG_R} fill="none" stroke="var(--kreda)" strokeWidth="1.5" pointerEvents="none" />
+            <path d={LEG_R} transform="matrix(-1 0 0 1 200 0)" fill="none" stroke="var(--kreda)" strokeWidth="1.5" pointerEvents="none" />
 
             <g clipPath={`url(#${uid}-torso)`}>
               <rect x="0" y="40" width="200" height={SHOULDER_LINE - 40} {...zoneProps("kark-barki")} style={{ stroke: "none" }} />
@@ -95,15 +105,16 @@ export function BodyMap() {
               <path
                 d={`M0 ${SHOULDER_LINE}C60 ${SHOULDER_LINE + 6} 140 ${SHOULDER_LINE + 6} 200 ${SHOULDER_LINE}`}
                 fill="none"
-                stroke="var(--mut-jasny)"
+                stroke="var(--kreda)"
                 strokeWidth="1"
+                strokeDasharray="3 3"
                 pointerEvents="none"
               />
               {side === "back" ? (
-                <path d="M100 108V236" stroke="var(--mut-jasny)" strokeOpacity="0.5" strokeWidth="1" strokeDasharray="2 4" pointerEvents="none" />
+                <path d="M100 108V236" stroke="var(--kreda)" strokeOpacity="0.5" strokeWidth="1" strokeDasharray="2 4" pointerEvents="none" />
               ) : null}
             </g>
-            <path d={TORSO} fill="none" stroke="var(--mut-jasny)" strokeWidth="1.25" pointerEvents="none" />
+            <path d={TORSO} fill="none" stroke="var(--kreda)" strokeWidth="1.5" pointerEvents="none" />
 
             {side === "front" ? (
               <ellipse cx="100" cy="30" rx="17" ry="22" {...zoneProps("twarz")} />
@@ -121,36 +132,37 @@ export function BodyMap() {
                 type="button"
                 onClick={() => select(z.id)}
                 aria-pressed={active === z.id}
-                className="min-h-11 rounded-full bg-wino-2 px-4 text-small font-medium transition-colors hover:bg-brzoskwinia hover:text-wino aria-pressed:bg-brzoskwinia aria-pressed:text-wino"
+                className="label min-h-11 border-2 border-kreda/40 px-4 transition-colors hover:border-kreda aria-pressed:border-szafran aria-pressed:bg-szafran aria-pressed:text-grafit"
               >
                 {z.label}
               </button>
             ))}
           </div>
 
-          <div aria-live="polite" className="mt-8 rounded-[2rem] bg-wino-2 p-5 lg:p-7">
-            <p className="text-small font-semibold text-miod">{ui.bodyMap.matching}</p>
-            <p className="headline mt-2 text-h4">{zone.label}</p>
+          <div aria-live="polite" className="mt-10 border-t-2 border-kreda pt-6">
+            <div className="flex items-baseline justify-between gap-4">
+              <p className="label text-szafran">{ui.bodyMap.matching}</p>
+              <p className="display text-h4">{zone.label}</p>
+            </div>
             <ul className="mt-4">
               {services.map((s) => (
-                <li key={s.id} className="grid grid-cols-[1fr_auto] items-baseline gap-x-4 border-b border-linia-jasna py-3 last:border-b-0">
+                <li key={s.id} className="grid grid-cols-[1fr_auto] items-baseline gap-x-4 border-b border-linia-jasna py-3">
                   <span>{s.name}</span>
-                  <span className="tabular whitespace-nowrap text-right">
-                    <span className="mr-3 text-small text-mut-jasny">{s.duration}</span>
-                    <span className="text-[1.25rem] font-semibold">{s.price}</span>
-                  </span>
+                  <span className="display tabular row-span-2 text-[1.875rem] normal-case leading-none text-szafran">{s.price}</span>
+                  <span className="label text-mgla">{s.duration}</span>
                 </li>
               ))}
             </ul>
-          </div>
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            <Link href={`/cennik#${zone.category}`} className="btn btn-primary">
-              {cta.fullPricing}
-              <ArrowRight className="btn-arrow" />
-            </Link>
-            <a href="#kontakt" className="btn btn-soft">
-              {cta.book}
-            </a>
+            <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
+              <Link href={`/cennik#${zone.category}`} className="btn btn-primary">
+                {cta.fullPricing}
+                <ArrowRight className="btn-arrow" />
+              </Link>
+              <a href="#kontakt" className="label link-arrow inline-flex min-h-11 items-center gap-3 hover:text-szafran">
+                {cta.book}
+                <ArrowRight className="btn-arrow" />
+              </a>
+            </div>
           </div>
         </div>
       </div>

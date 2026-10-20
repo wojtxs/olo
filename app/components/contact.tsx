@@ -4,43 +4,46 @@ import { ArrowRight } from "@/app/components/icons";
 
 export function Contact() {
   return (
-    <section id="kontakt" aria-labelledby="kontakt-title" className="sheet on-dark bg-wino pb-20 text-skora lg:pb-28">
-      <div className="container-site pt-16 lg:pt-24">
-        <p className="tag">{contactSection.eyebrow}</p>
-        <h2 id="kontakt-title" className="headline mt-5 text-[clamp(2.5rem,0.5rem+10vw,11rem)]">
+    <section id="kontakt" aria-labelledby="kontakt-title" className="on-szafran bg-szafran py-20 text-grafit lg:py-32">
+      <div className="container-site">
+        <p className="label">{contactSection.eyebrow}</p>
+        <h2 id="kontakt-title" className="display mt-4 text-[clamp(3rem,12.6vw,17rem)] leading-[0.8]">
           {contactSection.title}
         </h2>
 
-        <div className="mt-10 grid grid-cols-1 gap-10 lg:mt-14 lg:grid-cols-12 lg:gap-8">
+        <div className="mt-10 grid grid-cols-1 gap-12 lg:mt-16 lg:grid-cols-12 lg:gap-x-8">
           <div className="lg:col-span-6">
-            <p className="max-w-[40ch] text-lead text-mut-jasny">{contactSection.lead}</p>
+            <p className="max-w-[40ch] text-lead font-medium">{contactSection.lead}</p>
             <ul className="mt-6 flex flex-wrap gap-2">
               {contactSection.pills.map((pill) => (
-                <li key={pill} className="tag">
-                  <span className="h-1.5 w-1.5 rounded-full bg-miod" aria-hidden="true" />
+                <li key={pill} className="label bg-grafit px-3 py-2 text-kreda">
                   {pill}
                 </li>
               ))}
             </ul>
 
-            <div className="mt-10 flex flex-col gap-3">
-              <a href={contact.phoneHref} className="group flex items-center justify-between gap-4 rounded-[1.75rem] bg-miod px-6 py-5 text-wino">
+            <div className="mt-10 border-t-4 border-grafit">
+              <a href={contact.phoneHref} className="group flex items-end justify-between gap-4 border-b-2 border-grafit py-6">
                 <span>
-                  <span className="block text-small font-semibold">{contactSection.labels.phone}</span>
-                  <span className="headline tabular mt-1 block text-[clamp(2.25rem,1.5rem+3.5vw,4rem)]">{contact.phoneDisplay}</span>
+                  <span className="label block">{contactSection.labels.phone}</span>
+                  <span className="display tabular mt-2 block text-[clamp(3.25rem,1.5rem+8vw,7.5rem)] leading-[0.85]">
+                    {contact.phoneDisplay}
+                  </span>
                 </span>
-                <ArrowRight className="shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
+                <ArrowRight className="mb-3 shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
               </a>
-              <a href={contact.emailHref} className="group flex items-center justify-between gap-4 rounded-[1.75rem] bg-wino-2 px-5 py-5 sm:px-6">
+              <a href={contact.emailHref} className="group flex items-end justify-between gap-4 border-b-2 border-grafit py-6">
                 <span className="min-w-0">
-                  <span className="block text-small font-semibold text-mut-jasny">{contactSection.labels.email}</span>
-                  <span className="mt-1 block break-words text-[clamp(0.9375rem,0.7rem+1.1vw,1.625rem)] font-semibold">{contact.email}</span>
+                  <span className="label block">{contactSection.labels.email}</span>
+                  <span className="mt-2 block break-words text-[clamp(1.0625rem,0.8rem+1.2vw,1.75rem)] font-bold">
+                    {contact.email}
+                  </span>
                 </span>
-                <ArrowRight className="shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
+                <ArrowRight className="mb-2 shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
               </a>
-              <div className="rounded-[1.75rem] bg-wino-2 px-6 py-5">
-                <span className="block text-small font-semibold text-mut-jasny">{contactSection.labels.area}</span>
-                <span className="mt-1 block text-[clamp(1.25rem,1rem+1vw,1.75rem)] font-semibold">{contact.area}</span>
+              <div className="border-b-2 border-grafit py-6">
+                <span className="label block">{contactSection.labels.area}</span>
+                <span className="display mt-2 block text-[clamp(2rem,1.5rem+2vw,3.25rem)]">{contact.area}</span>
               </div>
             </div>
           </div>

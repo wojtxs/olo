@@ -1,24 +1,20 @@
 @import "tailwindcss";
 
-/* Ciepło skóry, miód olejku i głębokie wino. Sekcje kładą się jedna na drugiej
-   jak złożone ręczniki — ten sam ruch co karty w ofercie. */
+/* Boisko — ciepły grafit, kość i szafran: energia bez barw klubowych */
 :root {
-  --skora: #f7e6da;
-  --skora-2: #f0d5c3;
-  --brzoskwinia: #e8987a;
-  --miod: #e9a94b;
-  --cegla: #a3392a;
-  --cegla-ciemna: #8e2f22;
-  --wino: #3d1513;
-  --wino-2: #5a211c;
-  --mut: #7a4a40;
-  --mut-jasny: #d9b8a8;
-  --linia: rgba(61, 21, 19, 0.14);
-  --linia-jasna: rgba(247, 230, 218, 0.18);
+  --grafit: #1d1d1b;
+  --grafit-2: #2a2926;
+  --kreda: #f2eee6;
+  --kreda-2: #e6e0d4;
+  --szafran: #f0a830;
+  --szafran-ciemny: #7c5100;
+  --szary: #5a574f;
+  --mgla: #b3ada1;
+  --linia: rgba(29, 29, 27, 0.18);
+  --linia-jasna: rgba(242, 238, 230, 0.2);
 
-  --ease-calm: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-snap: cubic-bezier(0.2, 0.9, 0.1, 1);
   --gutter: 1rem;
-  --sheet-r: 2rem;
 }
 
 @media (min-width: 640px) {
@@ -29,64 +25,63 @@
 @media (min-width: 1024px) {
   :root {
     --gutter: 3rem;
-    --sheet-r: 3.5rem;
   }
 }
 
 @theme inline {
-  --color-skora: var(--skora);
-  --color-skora-2: var(--skora-2);
-  --color-brzoskwinia: var(--brzoskwinia);
-  --color-miod: var(--miod);
-  --color-cegla: var(--cegla);
-  --color-cegla-ciemna: var(--cegla-ciemna);
-  --color-wino: var(--wino);
-  --color-wino-2: var(--wino-2);
-  --color-mut: var(--mut);
-  --color-mut-jasny: var(--mut-jasny);
+  --color-grafit: var(--grafit);
+  --color-grafit-2: var(--grafit-2);
+  --color-kreda: var(--kreda);
+  --color-kreda-2: var(--kreda-2);
+  --color-szafran: var(--szafran);
+  --color-szafran-ciemny: var(--szafran-ciemny);
+  --color-szary: var(--szary);
+  --color-mgla: var(--mgla);
   --color-linia: var(--linia);
   --color-linia-jasna: var(--linia-jasna);
 
-  --font-sans: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-big-shoulders), "Arial Narrow", sans-serif;
 
+  --text-label: 0.75rem;
   --text-small: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
   --text-body: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
-  --text-lead: clamp(1.125rem, 1.05rem + 0.45vw, 1.4375rem);
-  --text-h4: clamp(1.5rem, 1.3rem + 0.9vw, 2.125rem);
-  --text-h3: clamp(2rem, 1.6rem + 2vw, 3.5rem);
-  --text-h2: clamp(2.75rem, 1.8rem + 4.6vw, 6.5rem);
-  --text-hero: clamp(3.5rem, 1.6rem + 10vw, 11rem);
+  --text-lead: clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem);
+  --text-h4: clamp(1.75rem, 1.45rem + 1.2vw, 2.75rem);
+  --text-h3: clamp(2.5rem, 1.9rem + 3vw, 5rem);
+  --text-h2: clamp(3.75rem, 2rem + 8.5vw, 11rem);
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 4.5rem;
   -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--skora);
-  color: var(--wino);
+  background: var(--kreda);
+  color: var(--grafit);
   font-family: var(--font-sans);
   font-size: var(--text-body);
-  font-optical-sizing: auto;
-  line-height: 1.6;
+  line-height: 1.55;
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: var(--miod);
-  color: var(--wino);
+  background: var(--szafran);
+  color: var(--grafit);
 }
 
 :focus-visible {
-  outline: 2px solid var(--cegla);
+  outline: 3px solid var(--szafran-ciemny);
   outline-offset: 3px;
-  border-radius: 6px;
 }
 .on-dark :focus-visible {
-  outline-color: var(--miod);
+  outline-color: var(--szafran);
+}
+.on-szafran :focus-visible {
+  outline-color: var(--grafit);
 }
 
 /* Klasy komponentów w warstwie, żeby utilities Tailwinda mogły je nadpisywać */
@@ -100,26 +95,43 @@ body {
     -webkit-mask: url(/logo-znak.svg) center / contain no-repeat;
     mask: url(/logo-znak.svg) center / contain no-repeat;
   }
-  /* Nagłówki: miękki grotesk z dużym rozmiarem optycznym, ciasno, bez wersalików */
-  .headline {
-    font-weight: 500;
-    letter-spacing: -0.035em;
-    line-height: 0.95;
-    text-wrap: balance;
+  /* Typografia: wąski grotesk w wersalikach, jak numery i nazwiska na koszulkach */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    /* 0.9 zostawia miejsce na polskie znaki nad wersalikami (Ó, Ż, Ś) */
+    line-height: 0.9;
+    letter-spacing: -0.005em;
   }
-  .tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    border: 1px solid var(--linia);
-    border-radius: 999px;
-    padding: 0.375rem 0.875rem;
-    font-size: var(--text-small);
-    font-weight: 500;
+  .label {
+    font-family: var(--font-sans);
+    font-stretch: 125%;
+    font-size: var(--text-label);
+    font-weight: 600;
+    letter-spacing: 0.08em;
     line-height: 1.2;
+    text-transform: uppercase;
   }
-  .on-dark .tag {
-    border-color: var(--linia-jasna);
+  .outline-text,
+  .outline-text-thin {
+    --stroke-c: var(--grafit);
+    color: transparent;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: var(--stroke-c);
+  }
+  .outline-text-thin {
+    -webkit-text-stroke-width: 1.5px;
+  }
+  .on-dark .outline-text,
+  .on-dark .outline-text-thin {
+    --stroke-c: var(--kreda);
+  }
+  .outline-szafran {
+    --stroke-c: var(--szafran) !important;
+  }
+  .outline-szafran-ciemny {
+    --stroke-c: var(--szafran-ciemny) !important;
   }
   .tabular {
     font-variant-numeric: tabular-nums lining-nums;
@@ -127,80 +139,97 @@ body {
 
   .container-site {
     width: 100%;
-    max-width: 92rem;
+    max-width: 96rem;
     margin-inline: auto;
     padding-inline: var(--gutter);
   }
 
-  /* Przyciski: miękkie pigułki, które lekko „uginają się” pod palcem */
+  /* Przyciski: twardy cień i krótki, sprężysty ruch — jak podanie */
   .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
-    min-height: 3.375rem;
-    padding: 0 1.75rem;
-    border-radius: 999px;
-    font-size: var(--text-body);
-    font-weight: 600;
+    gap: 0.875rem;
+    min-height: 3.5rem;
+    padding: 0 1.5rem;
+    border: 2px solid var(--grafit);
+    font-family: var(--font-sans);
+    font-stretch: 125%;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
     line-height: 1;
+    text-transform: uppercase;
     white-space: nowrap;
     transition:
-      background-color 300ms var(--ease-calm),
-      color 300ms var(--ease-calm),
-      transform 300ms var(--ease-calm);
-  }
-  .btn:active {
-    transform: scale(0.96);
+      transform 160ms var(--ease-snap),
+      box-shadow 160ms var(--ease-snap),
+      background-color 160ms var(--ease-snap),
+      color 160ms var(--ease-snap);
   }
   .btn-primary {
-    background: var(--cegla);
-    color: var(--skora);
+    background: var(--szafran);
+    color: var(--grafit);
+    box-shadow: 4px 4px 0 var(--grafit);
   }
   .btn-primary:hover {
-    background: var(--cegla-ciemna);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--grafit);
   }
-  .btn-soft {
-    background: var(--skora-2);
-    color: var(--wino);
+  .btn-primary:active {
+    transform: translate(3px, 3px);
+    box-shadow: 1px 1px 0 var(--grafit);
   }
-  .btn-soft:hover {
-    background: var(--brzoskwinia);
+  .btn-ghost {
+    color: var(--grafit);
+    background: transparent;
+  }
+  .btn-ghost:hover {
+    background: var(--grafit);
+    color: var(--kreda);
   }
   .on-dark .btn-primary {
-    background: var(--miod);
-    color: var(--wino);
+    border-color: var(--szafran);
+    box-shadow: 4px 4px 0 var(--kreda);
   }
   .on-dark .btn-primary:hover {
-    background: var(--skora);
+    box-shadow: 6px 6px 0 var(--kreda);
   }
-  .on-dark .btn-soft {
-    background: var(--wino-2);
-    color: var(--skora);
+  .on-dark .btn-primary:active {
+    box-shadow: 1px 1px 0 var(--kreda);
   }
-  .on-dark .btn-soft:hover {
-    background: var(--brzoskwinia);
-    color: var(--wino);
+  .on-dark .btn-ghost {
+    border-color: var(--kreda);
+    color: var(--kreda);
+  }
+  .on-dark .btn-ghost:hover {
+    background: var(--kreda);
+    color: var(--grafit);
   }
   .btn .btn-arrow,
   .link-arrow .btn-arrow {
-    transition: transform 350ms var(--ease-calm);
+    transition: transform 200ms var(--ease-snap);
   }
   .btn:hover .btn-arrow,
   .link-arrow:hover .btn-arrow {
-    transform: translateX(4px);
+    transform: translateX(5px);
   }
 
-  /* Warstwa: sekcja zachodzi zaokrągloną krawędzią na poprzednią, z miękkim cieniem
-     jak karty w ofercie */
-  .sheet {
+  /* Zdjęcia dostają twardy, przesunięty cień w kolorze akcentu */
+  .shot {
     position: relative;
-    margin-top: calc(var(--sheet-r) * -1);
-    border-radius: var(--sheet-r) var(--sheet-r) 0 0;
-    box-shadow: 0 -24px 48px -36px rgba(61, 21, 19, 0.45);
+    isolation: isolate;
+  }
+  .shot::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    translate: 10px 10px;
+    background: var(--szafran);
   }
 
-  /* FAQ: natywny details w miękkich kartach */
+  /* FAQ: natywny details */
   .faq-item summary {
     list-style: none;
     cursor: pointer;
@@ -208,119 +237,292 @@ body {
   .faq-item summary::-webkit-details-marker {
     display: none;
   }
-  .faq-item .faq-icon {
-    transition:
-      transform 450ms var(--ease-calm),
-      background-color 300ms var(--ease-calm);
+  .faq-item .faq-icon-v {
+    transform-origin: center;
+    transition: transform 220ms var(--ease-snap);
   }
-  .faq-item[open] .faq-icon {
-    transform: rotate(45deg);
-    background: var(--cegla);
-    color: var(--skora);
+  .faq-item[open] .faq-icon-v {
+    transform: scaleY(0);
+  }
+  @supports (interpolate-size: allow-keywords) {
+    .faq-list {
+      interpolate-size: allow-keywords;
+    }
+    .faq-item::details-content {
+      height: 0;
+      overflow: clip;
+      transition:
+        height 320ms var(--ease-snap),
+        content-visibility 320ms allow-discrete;
+    }
+    .faq-item[open]::details-content {
+      height: auto;
+    }
   }
 
-  /* Mapa napięć */
+  /* Mapa napięć jak tablica taktyczna */
   .zone {
-    fill: rgba(247, 230, 218, 0.08);
-    stroke: var(--mut-jasny);
-    stroke-width: 1.25;
+    fill: rgba(242, 238, 230, 0.06);
+    stroke: var(--kreda);
+    stroke-width: 1.5;
     cursor: pointer;
-    transition: fill 300ms var(--ease-calm);
+    transition: fill 180ms var(--ease-snap);
   }
   .zone:hover {
-    fill: rgba(232, 152, 122, 0.45);
+    fill: rgba(240, 168, 48, 0.4);
   }
   .zone[data-active="true"] {
-    fill: var(--brzoskwinia);
-    stroke: var(--skora);
+    fill: var(--szafran);
   }
   .zone-static {
-    fill: rgba(247, 230, 218, 0.04);
-    stroke: rgba(217, 184, 168, 0.6);
+    fill: rgba(242, 238, 230, 0.03);
+    stroke: var(--mgla);
     stroke-width: 1;
   }
 }
 
-@supports (interpolate-size: allow-keywords) {
-  .faq-list {
-    interpolate-size: allow-keywords;
-  }
-  .faq-item::details-content {
-    height: 0;
-    overflow: clip;
-    transition:
-      height 500ms var(--ease-calm),
-      content-visibility 500ms allow-discrete;
-  }
-  .faq-item[open]::details-content {
-    height: auto;
-  }
-}
-
 @media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    /* Warstwa wjeżdża z mocniej zaokrąglonymi rogami i układa się płasko,
-       jak rozkładany ręcznik */
-    .sheet {
-      animation: sheet-settle linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 70vh;
+  /* Nagłówek hero: wiersze wjeżdżają z dołu, szybko i pewnie */
+  .rise > span {
+    animation: rise 700ms var(--ease-snap) both;
+  }
+  .rise > span:nth-child(2) {
+    animation-delay: 90ms;
+  }
+  .rise > span:nth-child(3) {
+    animation-delay: 180ms;
+  }
+  @keyframes rise {
+    from {
+      translate: 0 0.3em;
+      opacity: 0;
     }
-    @keyframes sheet-settle {
+    to {
+      translate: 0 0;
+      opacity: 1;
+    }
+  }
+
+  @supports (animation-timeline: view()) {
+    /* Zdjęcie odsłania się z lewej do prawej, jak szybki atak */
+    .wipe {
+      animation: wipe linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 30%;
+    }
+    @keyframes wipe {
       from {
-        border-top-left-radius: calc(var(--sheet-r) * 3);
-        border-top-right-radius: calc(var(--sheet-r) * 3);
+        clip-path: inset(0 100% 0 0);
+      }
+      to {
+        clip-path: inset(0 0 0 0);
       }
     }
-
-    .rise {
-      animation: rise linear both;
-      animation-timeline: view();
-      animation-range: entry 0% cover 25%;
+    /* Rozpiska akcji rysuje się w trakcie przewijania sekcji Proces */
+    /* Na telefonie linia rysuje się, gdy diagram przejeżdża przez ekran;
+       na desktopie diagram stoi przyklejony, więc rysowanie idzie za listą kroków. */
+    .play-section {
+      view-timeline: --play block;
     }
-    @keyframes rise {
+    .play-diagram {
+      view-timeline: --play-diagram block;
+    }
+    .play-path {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation: draw-play linear both;
+      animation-timeline: --play-diagram;
+      animation-range: entry 60% cover 65%;
+    }
+    @media (min-width: 1024px) {
+      .play-path {
+        animation-timeline: --play;
+        animation-range: contain 0% contain 75%;
+      }
+    }
+    @keyframes draw-play {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+    .pop {
+      animation: pop linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 30%;
+    }
+    @keyframes pop {
       from {
         opacity: 0;
-        translate: 0 1.75rem;
+        translate: 0 1.5rem;
       }
       to {
         opacity: 1;
         translate: 0 0;
       }
     }
-    /* Zdjęcia wynurzają się miękko, jak ciało spod ręcznika */
-    .soften {
-      animation: soften linear both;
-      animation-timeline: view();
-      animation-range: entry 0% cover 35%;
-    }
-    @keyframes soften {
-      from {
-        clip-path: inset(8% 6% 8% 6% round 3rem);
-      }
-      to {
-        clip-path: inset(0 0 0 0 round 2rem);
-      }
-    }
-    .process-fill {
-      animation: fill-down linear both;
-      animation-timeline: view();
-      animation-range: entry 30% cover 55%;
-    }
-    @keyframes fill-down {
-      from {
-        scale: 1 0;
-      }
-    }
     .site-header {
       animation: header-line linear both;
       animation-timeline: scroll(root);
-      animation-range: 0 140px;
+      animation-range: 0 120px;
     }
     @keyframes header-line {
       to {
-        box-shadow: 0 1px 0 var(--linia);
+        box-shadow: 0 2px 0 var(--szafran);
       }
+    }
+  }
+}
+
+/* Znak w hero (wersja B). Bez ruchu: pełny, nieruchomy znak w szafranie.
+   Ruchome części to osobne warstwy, animowane tylko przez transform i opacity. */
+.hero-mark {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  container-type: size;
+}
+.mark-part {
+  position: absolute;
+}
+.mark-part > svg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: currentColor;
+}
+.mark-part > .mark-warm,
+.mark-part > .mark-heat {
+  fill: var(--kreda);
+  opacity: 0;
+}
+.mark-heat {
+  transition: opacity 300ms ease-out;
+}
+/* Przechylenie w stronę kursora — zmienne ustawia MarkStage tylko przy myszce */
+.mark-tilt {
+  transform: perspective(1200px) rotateX(var(--mark-rx, 0deg)) rotateY(var(--mark-ry, 0deg));
+  transition: transform 900ms var(--ease-snap);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Wejście: sylwetka rysuje się od dołu, dłoń od lewej, potem pojawiają się kręgi.
+     Pętla 6 s: dłoń sunie w górę pleców, ciepło biegnie po kręgosłupie od dołu do góry,
+     barki najpierw lekko się unoszą (napięcie), a potem opadają (ulga). */
+  .mark-still {
+    animation: mark-rise-in 1100ms var(--ease-snap) both;
+  }
+  .mark-shoulders {
+    animation:
+      mark-rise-in 1100ms var(--ease-snap) 120ms both,
+      mark-shoulders 6s ease-in-out 2.2s infinite;
+  }
+  .mark-hand {
+    animation:
+      mark-hand-in 1300ms var(--ease-snap) both,
+      mark-hand 6s ease-in-out infinite;
+    animation-delay: calc(450ms + var(--o) * 150ms), calc(2.2s + var(--o) * 120ms);
+  }
+  .mark-vert {
+    animation:
+      mark-vert-in 600ms var(--ease-snap) both,
+      mark-vert 6s ease-in-out infinite;
+    animation-delay: calc(900ms + var(--i) * 55ms), calc(2.4s + var(--up) * 110ms);
+  }
+  .mark-vert > .mark-warm {
+    animation: mark-warm 6s ease-in-out infinite;
+    animation-delay: calc(2.4s + var(--up) * 110ms);
+  }
+  [data-paused="true"] .hero-mark *,
+  [data-offscreen="true"] .hero-mark * {
+    animation-play-state: paused;
+  }
+
+  /* Przy przewijaniu znak odpływa w górę i lekko się obraca */
+  @supports (animation-timeline: scroll()) {
+    .hero-mark {
+      animation: mark-drift linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
+    }
+  }
+
+  @keyframes mark-rise-in {
+    from {
+      clip-path: inset(100% 0 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+  @keyframes mark-hand-in {
+    from {
+      clip-path: inset(0 100% 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+  @keyframes mark-vert-in {
+    from {
+      scale: 0;
+      opacity: 0;
+    }
+    to {
+      scale: 1;
+      opacity: 1;
+    }
+  }
+  @keyframes mark-hand {
+    0%,
+    62%,
+    100% {
+      translate: 0 0;
+    }
+    30% {
+      translate: -0.7cqh -1.4cqh;
+    }
+  }
+  @keyframes mark-vert {
+    0%,
+    24%,
+    100% {
+      scale: 1;
+    }
+    9% {
+      scale: 1.24;
+    }
+  }
+  @keyframes mark-warm {
+    0%,
+    24%,
+    100% {
+      opacity: 0;
+    }
+    9% {
+      opacity: 1;
+    }
+  }
+  @keyframes mark-shoulders {
+    0%,
+    70%,
+    100% {
+      translate: 0 0;
+    }
+    26% {
+      translate: 0 -0.5cqh;
+    }
+    44% {
+      translate: 0 0.25cqh;
+    }
+  }
+  @keyframes mark-drift {
+    to {
+      translate: 0 -8%;
+      rotate: -3deg;
+      opacity: 0.55;
     }
   }
 }
@@ -350,21 +552,25 @@ body {
   animation: none;
 }
 ::view-transition-group(.morph) {
-  animation-duration: 600ms;
-  animation-timing-function: var(--ease-calm);
+  animation-duration: 420ms;
+  animation-timing-function: var(--ease-snap);
 }
-::view-transition-old(.page-fade) {
-  animation: 220ms ease-in both vt-fade reverse;
+::view-transition-old(.page-slide) {
+  animation: 180ms ease-in both vt-out;
 }
-::view-transition-new(.page-fade) {
-  animation: 480ms var(--ease-calm) 120ms both vt-fade;
+::view-transition-new(.page-slide) {
+  animation: 360ms var(--ease-snap) 80ms both vt-in;
 }
-@keyframes vt-fade {
+@keyframes vt-out {
+  to {
+    opacity: 0;
+    translate: -24px 0;
+  }
+}
+@keyframes vt-in {
   from {
     opacity: 0;
-  }
-  to {
-    opacity: 1;
+    translate: 24px 0;
   }
 }
 @media (prefers-reduced-motion: reduce) {

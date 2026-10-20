@@ -3,8 +3,8 @@
 import * as React from "react";
 import { contact, ui } from "@/app/content";
 
-// Pasek „Zadzwoń / Napisz” na telefonie. Pojawia się po minięciu przycisku z hero
-// i chowa nad sekcją Kontakt, żeby jej nie dublować.
+// Pasek „Zadzwoń / Napisz” na telefonie — od krawędzi do krawędzi, jak tablica wyników.
+// Pojawia się po minięciu przycisku z hero i chowa nad sekcją Kontakt.
 export function StickyCta() {
   const [visible, setVisible] = React.useState(false);
 
@@ -32,20 +32,14 @@ export function StickyCta() {
 
   return (
     <div
-      className="fixed inset-x-3 bottom-[calc(0.75rem+env(safe-area-inset-bottom))] z-40 grid grid-cols-[1.4fr_1fr] gap-2 transition-[translate,opacity] duration-500 ease-[var(--ease-calm)] data-[visible=false]:pointer-events-none data-[visible=false]:translate-y-[150%] data-[visible=false]:opacity-0 lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 border-t-2 border-grafit bg-grafit pb-[env(safe-area-inset-bottom)] transition-transform duration-300 ease-[var(--ease-snap)] data-[visible=false]:pointer-events-none data-[visible=false]:translate-y-full lg:hidden"
       data-visible={visible}
       inert={!visible}
     >
-      <a
-        href={contact.phoneHref}
-        className="flex h-14 items-center justify-center rounded-full bg-cegla font-semibold text-skora shadow-[0_10px_30px_-12px_rgba(61,21,19,0.6)] active:scale-[0.97]"
-      >
+      <a href={contact.phoneHref} className="label flex h-14 items-center justify-center bg-szafran text-[0.8125rem] text-grafit">
         {ui.call}
       </a>
-      <a
-        href={contact.emailHref}
-        className="flex h-14 items-center justify-center rounded-full bg-wino font-semibold text-skora shadow-[0_10px_30px_-12px_rgba(61,21,19,0.6)] active:scale-[0.97]"
-      >
+      <a href={contact.emailHref} className="label flex h-14 items-center justify-center text-[0.8125rem] text-kreda">
         {ui.write}
       </a>
     </div>

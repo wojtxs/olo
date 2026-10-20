@@ -1,77 +1,81 @@
 import Image from "next/image";
 import { about, brand } from "@/app/content";
+import { CourtLines } from "@/app/components/court-lines";
 
 export function About() {
-  const ring = `${about.watermark} · ${brand.role.toUpperCase()}`;
+  const [first, last] = about.watermark.split(" ");
 
   return (
-    <section id="o-mnie" aria-labelledby="o-mnie-title" className="sheet bg-skora-2 pb-28 lg:pb-44">
-      <div className="container-site grid grid-cols-1 gap-14 pt-16 lg:grid-cols-12 lg:gap-8 lg:pt-24">
-        {/* Portret: prawdziwe zdjęcie w spokojnym kole. Głowa wychodzi ponad okrąg,
-            dół zdjęcia chowa się w łuku, a imię biegnie dolną krawędzią. */}
-        <figure className="relative mx-auto w-full max-w-md lg:sticky lg:top-24 lg:col-span-5 lg:max-w-none lg:self-start">
-          <div className="relative aspect-square">
-            <svg viewBox="0 0 400 400" className="absolute inset-0 h-full w-full text-mut" aria-hidden="true">
-              <defs>
-                <path id="luk-imienia" d="M14 200a186 186 0 0 0 372 0" />
-              </defs>
-              <text className="fill-current text-[14px] font-semibold tracking-[0.3em]">
-                <textPath href="#luk-imienia" startOffset="50%" textAnchor="middle">
-                  {ring}
-                </textPath>
-              </text>
-            </svg>
-            <div className="absolute inset-[11%] rounded-full bg-brzoskwinia" aria-hidden="true" />
-            <div className="absolute inset-x-[11%] bottom-[11%] top-[3%] overflow-hidden rounded-b-full">
-              <Image
-                src="/aleksander-pawlowski.png"
-                alt={about.photoAlt}
-                fill
-                quality={80}
-                sizes="(min-width: 1024px) 24vw, 60vw"
-                className="object-contain object-bottom"
-              />
+    <section id="o-mnie" aria-labelledby="o-mnie-title" className="py-20 lg:py-32">
+      <div className="container-site grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-x-8">
+        {/* Karta zawodnika: prawdziwe zdjęcie i fakty z profilu, bez dopisanych statystyk */}
+        <div className="lg:col-span-5">
+          <p className="label text-szafran-ciemny">{about.eyebrow}</p>
+          <figure className="mt-6 border-2 border-grafit bg-kreda shadow-[8px_8px_0_var(--grafit)] lg:sticky lg:top-24">
+            <div className="flex items-end justify-between gap-4 bg-grafit px-4 pb-3 pt-4 text-kreda">
+              <p className="display text-[clamp(2.25rem,9vw,3.5rem)] leading-[0.82]">
+                <span className="block">{first}</span>
+                <span className="block text-szafran">{last}</span>
+              </p>
+              <p className="label max-w-[8rem] text-right text-mgla">{brand.role}</p>
             </div>
-          </div>
-        </figure>
+            <div className="relative aspect-square overflow-hidden bg-szafran">
+              <CourtLines className="absolute inset-0 h-full w-full text-grafit/25" strokeWidth={1.5} />
+              <div className="absolute inset-x-0 bottom-0 top-[7%]">
+                <Image
+                  src="/aleksander-pawlowski.png"
+                  alt={about.photoAlt}
+                  fill
+                  quality={80}
+                  sizes="(min-width: 1024px) 22vw, 60vw"
+                  className="object-contain object-bottom"
+                />
+              </div>
+            </div>
+            <ul>
+              {about.facts.map((fact, i) => (
+                <li
+                  key={fact.label}
+                  className="grid grid-cols-[2.25rem_1fr_auto] items-baseline gap-x-3 border-t-2 border-grafit px-4 py-3"
+                >
+                  <span className="display tabular text-[1.5rem] text-szafran-ciemny">0{i + 1}</span>
+                  <span className="display text-[1.5rem] leading-none">{fact.label}</span>
+                  <span className="label text-right text-szary">{fact.meta}</span>
+                </li>
+              ))}
+            </ul>
+          </figure>
+        </div>
 
-        <div className="lg:col-span-6 lg:col-start-7">
-          <p className="tag">{about.eyebrow}</p>
-          <p className="headline mt-5 text-h3">{about.lead}</p>
-          <h2 id="o-mnie-title" className="headline mt-12 text-h2">
-            {about.titleLines[0]} {about.titleLines[1]}
+        <div className="lg:col-span-6 lg:col-start-7 lg:pt-12">
+          <p className="display text-[clamp(2.25rem,1.6rem+3vw,4.25rem)] leading-[0.9]">{about.lead}</p>
+
+          <h2 id="o-mnie-title" className="display mt-14 text-h2 lg:mt-20">
+            <span className="block">{about.titleLines[0]}</span>
+            <span className="outline-text outline-szafran-ciemny block">{about.titleLines[1]}</span>
           </h2>
 
-          <ol className="mt-8 flex flex-col gap-3">
+          <ol className="mt-12">
             {about.timeline.map((item, i) => (
-              <li key={item.title} className="rise rounded-[1.75rem] bg-skora p-5 lg:p-7">
-                <div className="flex items-center gap-3">
-                  <span className="tabular grid h-8 w-8 place-items-center rounded-full bg-skora-2 text-small font-semibold text-cegla">
-                    {i + 1}
-                  </span>
-                  <h3 className="headline text-h4">{item.title}</h3>
+              <li key={item.title} className="pop grid grid-cols-[4.5rem_1fr] gap-x-4 border-t-2 border-grafit py-7 lg:grid-cols-[6rem_1fr]">
+                <span className="display outline-text-thin tabular text-[3.75rem] leading-[0.8] lg:text-[5rem]" aria-hidden="true">
+                  0{i + 1}
+                </span>
+                <div>
+                  <h3 className="display text-h4">{item.title}</h3>
+                  <p className="mt-3 max-w-[54ch] text-szary">{item.text}</p>
                 </div>
-                <p className="mt-3 text-mut">{item.text}</p>
               </li>
             ))}
           </ol>
 
-          <div className="mt-10 space-y-5 text-mut">
+          <div className="mt-10 space-y-5 border-l-4 border-szafran pl-5 text-szary lg:pl-7">
             {about.bio.map((paragraph) => (
               <p key={paragraph.slice(0, 20)} className="max-w-[62ch]">
                 {paragraph}
               </p>
             ))}
           </div>
-
-          <ul className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {about.facts.map((fact) => (
-              <li key={fact.label} className="flex flex-col rounded-[1.5rem] border border-linia px-5 py-4">
-                <span className="font-semibold">{fact.label}</span>
-                <span className="text-small text-mut">{fact.meta}</span>
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
     </section>

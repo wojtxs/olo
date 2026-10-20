@@ -94,8 +94,8 @@ export const offer = {
         "Ulga w najbardziej napiętych partiach górnego odcinka ciała. Od szybkiego 30-minutowego masażu pleców, po kompleksowy 60-minutowy zabieg pleców, barków i karku.",
       features: ["plecy + barki + kark", "plecy + kark", "same plecy", "ręce i barki"],
       image: {
-        src: "/images/plecy-kark.jpg",
-        alt: "Zrelaksowane plecy i kark osoby leżącej na stole do masażu, w smugach popołudniowego światła",
+        src: "/images/b/kark.jpg",
+        alt: "Zbliżenie karku i łopatek osoby leżącej na stole do masażu, w ostrym bocznym świetle",
       },
     },
     {
@@ -105,8 +105,8 @@ export const offer = {
         "Pełen relaks dla zmęczonych nóg lub całego ciała. Dostosowane do Twoich potrzeb – od celowanego masażu stóp i łydek, przez nogi z plecami, aż po 90-minutowy relaks całego ciała.",
       features: ["całe ciało", "nogi + plecy", "stopy i łydki", "masaż dostawowy"],
       image: {
-        src: "/images/c/recznik.jpg",
-        alt: "Zwinięty bawełniany ręcznik na brzoskwiniowym lnianym prześcieradle stołu do masażu",
+        src: "/images/b/trampki.jpg",
+        alt: "Znoszone buty do koszykówki i zwinięty ręcznik przy nogach stołu do masażu na parkiecie",
       },
     },
     {
@@ -116,8 +116,8 @@ export const offer = {
         "Japoński masaż twarzy Kobido – naturalny lifting bez skalpela. Dostępny zarówno w klasycznym 60-minutowym wariancie, jak i rozszerzonym zabiegu complex z liftingiem.",
       features: ["kobido classic", "kobido complex + lifting"],
       image: {
-        src: "/images/kobido.jpg",
-        alt: "Kobieta z zamkniętymi oczami i ręcznikiem na włosach, odprężona przed masażem twarzy Kobido",
+        src: "/images/b/kobido.jpg",
+        alt: "Ręcznik zwinięty na zagłówku stołu do masażu i buteleczka olejku do twarzy",
       },
     },
   ],

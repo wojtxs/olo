@@ -2,11 +2,10 @@
 łacińskie z polskimi. Wynik trafia do app/fonts jako WOFF2.
 
 Źródła (licencja SIL OFL 1.1, repozytorium google/fonts):
-  ofl/fraunces/Fraunces[SOFT,WONK,opsz,wght].ttf          -> Fraunces-Roman.ttf
-  ofl/fraunces/Fraunces-Italic[SOFT,WONK,opsz,wght].ttf   -> Fraunces-Italic.ttf
-  ofl/schibstedgrotesk/SchibstedGrotesk[wght].ttf         -> SchibstedGrotesk.ttf
+  ofl/bigshoulders/BigShoulders[opsz,wght].ttf -> BigShoulders.ttf
+  ofl/archivo/Archivo[wdth,wght].ttf           -> Archivo.ttf
 
-Użycie: pip install fonttools brotli
+Użycie: pip install fonttools brotli skia-pathops
         python scripts/make-fonts.py <folder ze źródłami> app/fonts
 """
 import sys
@@ -30,9 +29,11 @@ UNICODES = (
 FEATURES = ["kern", "liga", "clig", "calt", "locl", "lnum", "tnum", "pnum", "case", "mark", "mkmk", "ccmp"]
 
 JOBS = [
-    # Jedna rodzina: rozmiar optyczny 12–96 zostaje (charakter w nagłówkach, spokój w tekście),
-    # szerokość przypięta na 100, grubości 300–700.
-    ("BricolageGrotesque.ttf", "Bricolage.woff2", {"wdth": 100, "wght": (300, 700)}),
+    # Nagłówki: statyczna odmiana display 800 z usuniętymi nakładkami konturów,
+    # żeby napisy obrysowane (-webkit-text-stroke) nie pokazywały wewnętrznych linii.
+    ("BigShoulders.ttf", "BigShoulders-ExtraBold.woff2", {"opsz": 72, "wght": 800}),
+    # Tekst: szerokość 100–125 (rozstrzelone etykiety), grubości 400–700.
+    ("Archivo.ttf", "Archivo.woff2", {"wdth": (100, 125), "wght": (400, 700)}),
 ]
 
 for src, dst, axes in JOBS:
@@ -45,7 +46,9 @@ for src, dst, axes in JOBS:
     subsetter = subset.Subsetter(options)
     subsetter.populate(unicodes=UNICODES)
     subsetter.subset(font)
-    font = instancer.instantiateVariableFont(font, axes)
+    static = all(not isinstance(v, tuple) for v in axes.values())
+    overlap = instancer.OverlapMode.REMOVE if static else instancer.OverlapMode.KEEP_AND_SET_FLAGS
+    font = instancer.instantiateVariableFont(font, axes, overlap=overlap)
     font.flavor = "woff2"
     font.save(OUT / dst)
     print(dst, round((OUT / dst).stat().st_size / 1024), "KB")

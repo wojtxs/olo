@@ -14,88 +14,82 @@ export const metadata: Metadata = {
 export default function CennikPage() {
   return (
     <ViewTransition
-      enter={{ "nav-forward": "page-fade", "nav-back": "page-fade", default: "none" }}
-      exit={{ "nav-forward": "page-fade", "nav-back": "page-fade", default: "none" }}
+      enter={{ "nav-forward": "page-slide", "nav-back": "page-slide", default: "none" }}
+      exit={{ "nav-forward": "page-slide", "nav-back": "page-slide", default: "none" }}
       default="none"
     >
-      <div className="pb-20 lg:pb-32">
-        <div className="container-site pt-6 lg:pt-10">
-          <Link
-            href="/"
-            transitionTypes={["nav-back"]}
-            className="group inline-flex min-h-11 items-center gap-3 rounded-full bg-skora-2 px-4 text-small font-medium transition-colors hover:bg-brzoskwinia"
-          >
-            <ArrowLeft className="transition-transform duration-300 group-hover:-translate-x-1" />
-            {pricing.back}
-          </Link>
+      <div className="container-site pb-20 pt-8 lg:pb-32 lg:pt-12">
+        <Link
+          href="/"
+          transitionTypes={["nav-back"]}
+          className="label group inline-flex min-h-11 items-center gap-3 text-szary transition-colors hover:text-grafit"
+        >
+          <ArrowLeft className="transition-transform duration-200 group-hover:-translate-x-1" />
+          {pricing.back}
+        </Link>
 
-          <header className="mt-10 grid grid-cols-1 gap-6 lg:mt-14 lg:grid-cols-12 lg:items-end lg:gap-8">
-            <div className="lg:col-span-6">
-              <p className="tag">{pricing.eyebrow}</p>
-              <h1 className="headline mt-5 text-hero">{pricing.title}</h1>
-            </div>
-            <p className="max-w-[40ch] text-lead text-mut lg:col-span-5 lg:col-start-8">{pricing.lead}</p>
-          </header>
+        <header className="mt-8 grid grid-cols-1 gap-6 border-b-4 border-grafit pb-10 lg:mt-12 lg:grid-cols-12 lg:items-end lg:gap-8">
+          <div className="lg:col-span-7">
+            <p className="label text-szafran-ciemny">{pricing.eyebrow}</p>
+            <h1 className="display mt-4 text-[clamp(6rem,3rem+18vw,18rem)] leading-[0.78]">{pricing.title}</h1>
+          </div>
+          <p className="max-w-[40ch] text-lead text-szary lg:col-span-4 lg:col-start-9">{pricing.lead}</p>
+        </header>
+
+        <nav aria-label={pricing.title} className="sticky top-0 z-30 -mx-[var(--gutter)] overflow-x-auto bg-kreda px-[var(--gutter)] py-3">
+          <ul className="flex gap-2">
+            {pricing.categories.map((category, i) => (
+              <li key={category.slug} className="shrink-0">
+                <a
+                  href={`#${category.slug}`}
+                  className="label inline-flex min-h-11 items-center gap-2 border-2 border-grafit px-3 transition-colors hover:bg-grafit hover:text-kreda"
+                >
+                  <span className="tabular text-szafran-ciemny">0{i + 1}</span>
+                  {category.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="mt-6 flex flex-col gap-12 lg:gap-16">
+          {pricing.categories.map((category) => (
+            <section key={category.slug} id={category.slug} aria-labelledby={`${category.slug}-title`} className="scroll-mt-32">
+              <div className="on-dark flex items-end justify-between gap-4 bg-grafit px-4 py-4 text-kreda lg:px-6">
+                <ViewTransition name={`kategoria-${category.slug}`} share="morph">
+                  <h2 id={`${category.slug}-title`} className="display text-[clamp(2.25rem,1.6rem+3vw,4.5rem)]">
+                    {category.title}
+                  </h2>
+                </ViewTransition>
+              </div>
+              <ul className="border-x-2 border-b-2 border-grafit">
+                {category.services.map((service) => (
+                  <li
+                    key={service.id}
+                    className="grid grid-cols-[1fr_auto] items-baseline gap-x-6 border-b-2 border-grafit/15 px-4 py-4 last:border-b-0 lg:grid-cols-[1fr_8rem_8rem] lg:px-6"
+                  >
+                    <span className="text-lead font-medium leading-snug">{service.name}</span>
+                    <span className="label tabular order-3 text-szary lg:order-none lg:text-right">{service.duration}</span>
+                    <span className="display tabular row-span-2 text-right text-[2.25rem] normal-case leading-none text-szafran-ciemny lg:row-span-1">
+                      {service.price}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
         </div>
 
-        <div className="container-site mt-10 lg:mt-14">
-          <nav aria-label={pricing.title} className="sticky top-0 z-30 -mx-[var(--gutter)] overflow-x-auto bg-skora px-[var(--gutter)] py-3">
-            <ul className="flex gap-2">
-              {pricing.categories.map((category) => (
-                <li key={category.slug} className="shrink-0">
-                  <a
-                    href={`#${category.slug}`}
-                    className="inline-flex min-h-11 items-center rounded-full bg-skora-2 px-4 text-small font-medium transition-colors hover:bg-brzoskwinia"
-                  >
-                    {category.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          <div className="mt-4 flex flex-col gap-4">
-            {pricing.categories.map((category) => (
-              <section
-                key={category.slug}
-                id={category.slug}
-                aria-labelledby={`${category.slug}-title`}
-                className="grid scroll-mt-28 grid-cols-1 gap-4 rounded-[2.25rem] bg-skora-2 p-5 lg:grid-cols-12 lg:gap-8 lg:p-10"
-              >
-                <div className="lg:col-span-4">
-                  <ViewTransition name={`kategoria-${category.slug}`} share="morph">
-                    <h2 id={`${category.slug}-title`} className="headline text-h3">
-                      {category.title}
-                    </h2>
-                  </ViewTransition>
-                </div>
-                <ul className="lg:col-span-8">
-                  {category.services.map((service) => (
-                    <li
-                      key={service.id}
-                      className="grid grid-cols-[1fr_auto] items-baseline gap-x-6 gap-y-1 border-b border-linia py-4 first:pt-0 last:border-b-0 last:pb-0 sm:grid-cols-[1fr_auto_auto]"
-                    >
-                      <span className="text-lead font-medium leading-snug">{service.name}</span>
-                      <span className="tabular order-3 col-span-2 text-small text-mut sm:order-none sm:col-span-1">{service.duration}</span>
-                      <span className="tabular min-w-[4.5rem] text-right text-h4 font-semibold">{service.price}</span>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            ))}
-          </div>
-
-          <div className="on-dark mt-10 grid grid-cols-1 gap-8 rounded-[2.5rem] bg-wino p-7 text-skora lg:mt-14 lg:grid-cols-12 lg:items-end lg:p-12">
-            <p className="headline text-h3 lg:col-span-7">{pricing.outro}</p>
-            <div className="flex flex-wrap gap-3 lg:col-span-5 lg:justify-end">
-              <a href={contact.phoneHref} className="btn btn-primary tabular">
-                {contact.phoneDisplay}
-                <ArrowRight className="btn-arrow" />
-              </a>
-              <Link href="/#kontakt" prefetch={false} transitionTypes={["nav-back"]} className="btn btn-soft">
-                {pricing.contactButton}
-              </Link>
-            </div>
+        <div className="on-dark mt-16 grid grid-cols-1 gap-8 bg-grafit p-6 text-kreda lg:mt-24 lg:grid-cols-12 lg:items-end lg:p-10">
+          <p className="display text-[clamp(2.5rem,1.8rem+3vw,5rem)] leading-[0.92] lg:col-span-7">{pricing.outro}</p>
+          <div className="flex flex-wrap gap-4 lg:col-span-5 lg:justify-end">
+            <a href={contact.phoneHref} className="btn btn-primary tabular">
+              {contact.phoneDisplay}
+              <ArrowRight className="btn-arrow" />
+            </a>
+            <Link href="/#kontakt" prefetch={false} transitionTypes={["nav-back"]} className="btn btn-ghost">
+              {pricing.contactButton}
+            </Link>
           </div>
         </div>
       </div>

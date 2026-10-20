@@ -6,90 +6,92 @@ import { ArrowRight } from "@/app/components/icons";
 
 export function Offer() {
   return (
-    <section id="oferta" aria-labelledby="oferta-title" className="sheet bg-skora-2 pb-28 lg:pb-44">
-      <div className="container-site pt-16 lg:pt-24">
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-end lg:gap-8">
+    <section id="oferta" aria-labelledby="oferta-title" className="bg-kreda-2 py-20 lg:py-32">
+      <div className="container-site">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <p className="tag">{offer.eyebrow}</p>
-            <h2 id="oferta-title" className="headline mt-5 text-h2">
-              {offer.titleLines[0]} {offer.titleLines[1]}
+            <p className="label text-szafran-ciemny">{offer.eyebrow}</p>
+            <h2 id="oferta-title" className="display mt-5 text-h2">
+              <span className="block">{offer.titleLines[0]}</span>
+              <span className="outline-text block">{offer.titleLines[1]}</span>
             </h2>
           </div>
-          <p className="max-w-[42ch] text-lead text-mut lg:col-span-5">{offer.lead}</p>
+          <p className="max-w-[42ch] text-lead text-szary lg:col-span-4 lg:col-start-9">{offer.lead}</p>
         </div>
 
-        {/* Karty układają się jedna na drugiej jak złożone ręczniki (na desktopie) */}
-        <div className="mt-12 flex flex-col gap-6 lg:mt-16 lg:gap-10">
+        <div className="mt-16 flex flex-col gap-16 lg:mt-24 lg:gap-24">
           {offer.categories.map((category, i) => {
             const services = pricing.categories.find((c) => c.slug === category.slug)?.services ?? [];
             return (
-              <article
-                key={category.slug}
-                className="rounded-[2.25rem] bg-skora p-3 shadow-[0_-24px_48px_-36px_rgba(61,21,19,0.45)] sm:p-4 lg:sticky lg:p-5"
-                style={{ top: `calc(5.5rem + ${i * 1.5}rem)` }}
-              >
-                <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-10">
-                  <div className="soften relative aspect-[4/3] overflow-hidden rounded-[1.75rem] bg-skora-2 lg:col-span-5 lg:aspect-auto lg:min-h-[30rem]">
-                    <Image
-                      src={category.image.src}
-                      alt={category.image.alt}
-                      fill
-                      quality={70}
-                      sizes="(min-width: 1024px) 38vw, 100vw"
-                      className="object-cover"
-                    />
+              <article key={category.slug} className="border-t-4 border-grafit pt-6 lg:pt-8">
+                <div className="flex items-start justify-between gap-6">
+                  <ViewTransition name={`kategoria-${category.slug}`} share="morph">
+                    <h3 className="display text-h3">{category.title}</h3>
+                  </ViewTransition>
+                  <span className="display outline-text outline-szafran-ciemny tabular text-[4.5rem] leading-[0.75] lg:text-[8rem]" aria-hidden="true">
+                    0{i + 1}
+                  </span>
+                </div>
+
+                <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
+                  <div className="shot wipe mr-[10px] aspect-[4/5] lg:col-span-4">
+                    <div className="relative h-full w-full overflow-hidden bg-grafit">
+                      <Image
+                        src={category.image.src}
+                        alt={category.image.alt}
+                        fill
+                        quality={70}
+                        sizes="(min-width: 1024px) 30vw, 95vw"
+                        className="object-cover"
+                      />
+                    </div>
                   </div>
 
-                  <div className="flex flex-col px-2 pb-3 sm:px-3 lg:col-span-7 lg:py-4 lg:pr-6">
-                    <div className="flex items-center gap-3">
-                      <span className="tabular grid h-9 w-9 place-items-center rounded-full bg-cegla text-small font-semibold text-skora">
-                        {i + 1}
-                      </span>
-                      <ViewTransition name={`kategoria-${category.slug}`} share="morph">
-                        <h3 className="headline text-h3">{category.title}</h3>
-                      </ViewTransition>
-                    </div>
-                    <p className="mt-5 max-w-[52ch] text-lead text-mut">{category.description}</p>
-                    <ul className="mt-5 flex flex-wrap gap-2">
+                  <div className="lg:col-span-4">
+                    <p className="text-lead leading-[1.5]">{category.description}</p>
+                    <ul className="mt-6 flex flex-wrap gap-2">
                       {category.features.map((feature) => (
-                        <li key={feature} className="tag bg-skora-2">
+                        <li key={feature} className="label border-2 border-grafit px-3 py-2">
                           {feature}
-                        </li>
-                      ))}
-                    </ul>
-                    <ul className="mt-6 border-t border-linia">
-                      {services.map((service) => (
-                        <li key={service.id} className="grid grid-cols-[1fr_auto] items-baseline gap-x-4 border-b border-linia py-3">
-                          <span>{service.name}</span>
-                          <span className="tabular whitespace-nowrap text-right">
-                            <span className="mr-3 text-small text-mut">{service.duration}</span>
-                            <span className="text-[1.25rem] font-semibold">{service.price}</span>
-                          </span>
                         </li>
                       ))}
                     </ul>
                     <Link
                       href={`/cennik#${category.slug}`}
                       transitionTypes={["nav-forward"]}
-                      className="link-arrow mt-6 inline-flex min-h-11 items-center gap-3 self-start font-semibold text-cegla"
+                      className="label link-arrow mt-8 inline-flex min-h-11 items-center gap-3 text-szafran-ciemny"
                       aria-label={`${cta.details}: ${category.title}`}
                     >
                       {cta.details}
                       <ArrowRight className="btn-arrow" />
                     </Link>
                   </div>
+
+                  {/* Tablica wyników: warianty z cennika */}
+                  <ul className="on-dark self-start bg-grafit p-5 text-kreda lg:col-span-4">
+                    {services.map((service) => (
+                      <li
+                        key={service.id}
+                        className="grid grid-cols-[1fr_auto] items-baseline gap-x-4 border-b border-linia-jasna py-3 first:pt-0 last:border-b-0 last:pb-0"
+                      >
+                        <span className="text-small">{service.name}</span>
+                        <span className="display tabular row-span-2 text-[1.875rem] normal-case leading-none text-szafran">{service.price}</span>
+                        <span className="label text-mgla">{service.duration}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </article>
             );
           })}
         </div>
 
-        <div className="mt-12 flex flex-wrap items-center gap-3 lg:mt-16">
+        <div className="mt-16 flex flex-wrap items-center gap-5 border-t-4 border-grafit pt-10 lg:mt-24">
           <Link href="/cennik" transitionTypes={["nav-forward"]} className="btn btn-primary">
             {cta.fullPricing}
             <ArrowRight className="btn-arrow" />
           </Link>
-          <a href="#kontakt" className="btn btn-soft bg-skora">
+          <a href="#kontakt" className="btn btn-ghost">
             {cta.book}
           </a>
         </div>

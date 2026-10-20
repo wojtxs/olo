@@ -11,14 +11,14 @@ npm run build   # build produkcyjny (oba widoki jako statyczny HTML)
 
 - `app/content.ts` — cała treść strony w jednym miejscu (teksty 1:1 z wersji sprzed redesignu).
 - `app/components/` — sekcje i małe wyspy JS: menu, sticky pasek „Zadzwoń / Napisz”, mapa napięć, wideo w hero.
-- `app/fonts/` — przycięty font Bricolage Grotesque (licencja SIL OFL 1.1, plik `OFL-BricolageGrotesque.txt`).
+- `app/fonts/` — przycięte fonty Big Shoulders i Archivo (licencja SIL OFL 1.1, pliki `OFL-*.txt`).
 - `public/images`, `public/video` — zdjęcia (źródła dla `next/image`, które serwuje AVIF/WebP) i pętla wideo do hero (MP4 + WebM).
 
 ## Skrypty
 
 - `node scripts/verify-content.mjs` — po `npm run build` sprawdza, czy każdy tekst z wersji sprzed redesignu jest na stronie.
 - `node scripts/build-map.mjs` — odświeża mapę dojazdu z danych OpenStreetMap (`app/components/map-data.ts`).
-- `python scripts/make-fonts.py <źródła> app/fonts` — ponownie przycina fonty (wymaga `fonttools` i `brotli`).
+- `python scripts/make-fonts.py <źródła> app/fonts` — ponownie przycina fonty (wymaga `fonttools`, `brotli` i `skia-pathops`).
 
 ## Opinie klientów
 
