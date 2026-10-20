@@ -67,7 +67,7 @@ export function Footer() {
           </p>
           <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
             <p>
-              {footer.credit.label} <a href={footer.credit.href} target="_blank" rel="noopener" className="font-semibold text-skora underline decoration-1 underline-offset-4 transition-colors hover:text-miod">
+              {footer.credit.label} <a href={footer.credit.href} target="_blank" rel="noopener" className="font-semibold text-skora transition-colors hover:text-miod">
                 {footer.credit.studio}
               </a>
             </p>
