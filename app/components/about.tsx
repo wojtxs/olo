@@ -24,7 +24,7 @@ export function About() {
             <div className="absolute inset-[11%] rounded-full bg-brzoskwinia" aria-hidden="true" />
             <div className="absolute inset-x-[11%] bottom-[11%] top-[3%] overflow-hidden rounded-b-full">
               <Image
-                src="/olek.png"
+                src="/aleksander-pawlowski.png"
                 alt={about.photoAlt}
                 fill
                 quality={80}
