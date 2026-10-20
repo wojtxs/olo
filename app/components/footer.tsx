@@ -1,24 +1,17 @@
 import Link from "next/link";
 import { brand, contact, footer } from "@/app/content";
 import { ArrowUp } from "@/app/components/icons";
-import { TensionLine } from "@/app/components/tension-line";
+import { LogoMark } from "@/app/components/logo-mark";
 
 export function Footer() {
   return (
     <footer className="on-dark bg-wino text-skora">
-      {/* Na samym dole linia jest już zupełnie spokojna */}
-      <TensionLine from={0.04} to={0} height={60} seed={9} className="h-10" />
-      <div className="container-site pb-8 pt-12 lg:pt-16">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
+      <div className="container-site pb-8">
+        <div className="grid grid-cols-1 gap-12 border-t border-linia-jasna pt-12 lg:grid-cols-12 lg:gap-8 lg:pt-16">
           <div className="lg:col-span-6">
             {/* Znak: monogram i nazwa, jak logo w stopce */}
             <Link href="/" prefetch={false} className="group inline-flex items-center gap-4">
-              <span
-                className="grid h-12 w-12 shrink-0 place-items-center rounded-[0.9rem] bg-miod text-[1.125rem] font-semibold tracking-[-0.03em] text-wino transition-transform duration-300 group-hover:-rotate-6"
-                aria-hidden="true"
-              >
-                AP
-              </span>
+              <LogoMark className="h-16 text-miod transition-transform duration-300 group-hover:-rotate-3" />
               <span className="flex flex-col">
                 <span className="headline text-[clamp(1.75rem,1.4rem+1.5vw,2.5rem)]">
                   {brand.name.split(" ")[0]} <span className="text-miod">{brand.name.split(" ").slice(1).join(" ")}</span>

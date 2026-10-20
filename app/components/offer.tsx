@@ -3,13 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { cta, offer, pricing } from "@/app/content";
 import { ArrowRight } from "@/app/components/icons";
-import { TensionLine } from "@/app/components/tension-line";
 
 export function Offer() {
   return (
-    <section id="oferta" aria-labelledby="oferta-title" className="bg-skora-2 pb-20 lg:pb-32">
-      <TensionLine from={0.62} to={0.5} seed={5} className="h-24 lg:h-32" />
-      <div className="container-site pt-10 lg:pt-14">
+    <section id="oferta" aria-labelledby="oferta-title" className="sheet bg-skora-2 pb-28 lg:pb-44">
+      <div className="container-site pt-16 lg:pt-24">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-end lg:gap-8">
           <div className="lg:col-span-7">
             <p className="tag">{offer.eyebrow}</p>

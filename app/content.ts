@@ -1,6 +1,9 @@
 // Cała treść strony w jednym miejscu. Teksty są przeniesione 1:1 z wersji
 // sprzed redesignu (commit 336199d) i porównywane z nią przez
 // scripts/verify-content.mjs. Nie zmieniaj ich bez zgody właściciela.
+// W październiku 2026, na prośbę właściciela, część tekstów uzupełniono
+// informacjami z profilu na Facebooku (Mobilemed, Rysie Sochaczew, szkolenia,
+// dojazd w Sochaczewie bez dopłaty, wpis o bólu karku przy pracy siedzącej).
 
 export const contact = {
   phoneDisplay: "692 094 577",
@@ -48,31 +51,31 @@ export const hero = {
 export const about = {
   eyebrow: "O mnie",
   watermark: "ALEKSANDER PAWŁOWSKI",
-  lead: "Mobilny masażysta. Student fizjoterapii. Koszykarz. Cały czas się uczę.",
+  lead: "Technik masażysta, student fizjoterapii i były zawodnik Rysi Sochaczew.",
   titleLines: ["Praca", "z ciałem"],
   timeline: [
     {
       title: "Edukacja i praktyka",
-      text: "Studiuję fizjoterapię w Akademii Medycznej Nauk Stosowanych i Holistycznych. Jestem też certyfikowanym technikiem masażystą. Wiedza z zajęć i codzienna praca z ludźmi pomagają mi rozwijać warsztat.",
+      text: "Jestem certyfikowanym technikiem masażystą i studiuję fizjoterapię na Akademii Medycznej Nauk Stosowanych i Holistycznych. Współprowadzę też szkolenia z masażu, a doświadczenie zdobywałem m.in. w firmie Mobilemed.",
     },
     {
-      title: "Doświadczenie ruchowe",
-      text: "Od dziecka gram w koszykówkę. Dobrze rozumiem, jak ciało reaguje na wysiłek, gdzie pojawiają się napięcia i jak można je skutecznie rozluźnić.",
+      title: "Praca ze sportowcami",
+      text: "Od dziecka grałem w koszykówkę, zaczynałem w Rysiach Sochaczew. Teraz jestem w tej drużynie jako masażysta. To już mój drugi sezon: przygotowuję zawodników do meczów i pomagam im w regeneracji.",
     },
     {
       title: "Podejście",
-      text: "Nie skupiam się tylko na jednym miejscu bólu. Patrzę na to, jak funkcjonuje całe ciało, bo wszystko jest ze sobą połączone.",
+      text: "Masaż dopasowuję do człowieka: do tego, czego potrzebuje, i do wieku. Nie skupiam się tylko na jednym miejscu bólu. Patrzę na to, jak funkcjonuje całe ciało, bo wszystko jest ze sobą połączone.",
     },
   ],
   bio: [
     "Jestem absolwentem Medycznego Studium Zawodowego na kierunku technik masażysta. Podczas tej nauki zdobyłem wiedzę w zakresie masażu klasycznego, relaksacyjnego, centryfugalnego, sportowego oraz podstaw masażu limfatycznego i gorącymi kamieniami.",
-    "Na co dzień jestem studentem 3 roku fizjoterapii na Akademii Medycznej Nauk Stosowanych i Holistycznych. Jestem osobą ambitną i zdyscyplinowaną, co potwierdza fakt posiadania stypendium rektora tejże uczelni 2 rok z rzędu. Dodatkowo w kontekście masażu opanowałem kurs kobido i cały rytuał kobido complex dzięki specjalnemu szkoleniu.",
+    "Studia traktuję poważnie: dwa lata z rzędu dostałem stypendium rektora. Przeszedłem też szkolenie z japońskiego masażu twarzy kobido, razem z pełnym rytuałem kobido complex.",
   ],
   facts: [
     { label: "Student fizjoterapii", meta: "AMNSiH" },
     { label: "Technik masażysta", meta: "Certyfikowany" },
-    { label: "Koszykarz", meta: "Życiowa pasja" },
-    { label: "Stały rozwój", meta: "Kursy i szkolenia" },
+    { label: "Rysie Sochaczew", meta: "Masażysta drużyny" },
+    { label: "Szkolenia z masażu", meta: "Współprowadzę" },
   ],
   photoAlt: "Aleksander Pawłowski",
 } as const;
@@ -82,7 +85,7 @@ export type CategorySlug = "plecy-barki-kark" | "nogi-cale-cialo" | "twarz";
 export const offer = {
   eyebrow: "Oferta",
   titleLines: ["Rodzaje", "masażu"],
-  lead: "Wszystkie zabiegi dostosowuję do Twoich potrzeb. Niezależnie od tego, czy potrzebujesz głębokiego relaksu, czy szybkiej ulgi w napiętych partiach ciała.",
+  lead: "Jesteś spięty, chcesz odpocząć bez wychodzenia z domu albo potrzebujesz regeneracji po treningu? Każdy zabieg dopasowuję do tego, czego akurat potrzebujesz.",
   categories: [
     {
       slug: "plecy-barki-kark",
@@ -161,7 +164,7 @@ export const faq = {
     {
       question: "Gdzie dojeżdżasz?",
       answer:
-        "Na terenie Sochaczewa i najbliższych okolic. Jeśli mieszkasz trochę dalej, napisz i sprawdzimy, czy damy radę.",
+        "Na terenie Sochaczewa i najbliższych okolic. W samym Sochaczewie za dojazd nic nie dopłacasz. Jeśli mieszkasz trochę dalej, napisz i sprawdzimy, czy damy radę.",
     },
     {
       question: "Jak umówić wizytę?",
@@ -179,6 +182,16 @@ export const faq = {
         "Tak. Zawsze na początku rozmawiamy o tym, co Ci dolega i jakiego efektu oczekujesz. Każda wizyta wygląda nieco inaczej, bo każde ciało jest inne.",
     },
     {
+      question: "Masujesz też sportowców?",
+      answer:
+        "Tak. Drugi sezon pracuję z koszykarzami Rysi Sochaczew przy przygotowaniu do meczów i regeneracji. Jeśli trenujesz, powiedz o tym na początku wizyty, a dobiorę masaż pod regenerację.",
+    },
+    {
+      question: "Dlaczego przy pracy siedzącej bolą kark i plecy?",
+      answer:
+        "Najczęściej przez głowę wysuniętą do przodu. Gdy jest w jednej linii z kręgosłupem, mięśnie karku nie muszą się napracować. Kiedy pochylasz się nad ekranem, głowa oddala się od osi kręgosłupa i trzeba ją utrzymać dużo większym wysiłkiem. Po wielu godzinach w takiej pozycji mięśnie się skracają i przeciążają. Pomaga dobrze ustawione stanowisko pracy, rozciąganie i rozluźnienie tych mięśni, na przykład masażem.",
+    },
+    {
       question: "Ile trwa cała wizyta?",
       answer:
         "Sam masaż trwa od 30 do 90 minut, w zależności od wybranego zabiegu. Z dojazdem i krótką rozmową na początku trzeba doliczyć około 15 do 20 minut.",
@@ -191,7 +204,7 @@ export const contactSection = {
   eyebrow: "Kontakt",
   title: "Porozmawiajmy",
   lead: "Zadzwoń lub napisz. Zazwyczaj odpisuję w ciągu kilku godzin i szybko ustalimy dogodny termin.",
-  pills: ["Szybka odpowiedź", "Dojazd gratis"],
+  pills: ["Szybka odpowiedź", "Dojazd w Sochaczewie gratis"],
   labels: { phone: "Telefon", email: "E-mail", area: "Dojazd" },
   mapTitle: "Mapa Sochaczew",
 } as const;

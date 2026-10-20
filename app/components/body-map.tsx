@@ -4,7 +4,6 @@ import * as React from "react";
 import Link from "next/link";
 import { allServices, cta, ui, zones, type ZoneId } from "@/app/content";
 import { ArrowRight } from "@/app/components/icons";
-import { TensionLine } from "@/app/components/tension-line";
 
 type Side = "front" | "back";
 
@@ -43,9 +42,8 @@ export function BodyMap() {
   });
 
   return (
-    <section aria-labelledby="mapa-napiec-title" className="on-dark bg-wino pb-20 text-skora lg:pb-28">
-      <TensionLine from={0.5} to={0.4} seed={7} className="h-24 lg:h-32" />
-      <div className="container-site grid grid-cols-1 gap-12 pt-10 lg:grid-cols-12 lg:gap-x-8 lg:gap-y-0 lg:pt-14">
+    <section aria-labelledby="mapa-napiec-title" className="sheet on-dark bg-wino pb-28 text-skora lg:pb-40">
+      <div className="container-site grid grid-cols-1 gap-12 pt-16 lg:grid-cols-12 lg:gap-x-8 lg:gap-y-0 lg:pt-24">
         <h2 id="mapa-napiec-title" className="headline text-h2 lg:col-span-6 lg:row-start-1">
           {ui.bodyMap.title}
         </h2>

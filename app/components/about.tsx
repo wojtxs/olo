@@ -1,33 +1,35 @@
 import Image from "next/image";
-import { about } from "@/app/content";
-import { TensionLine } from "@/app/components/tension-line";
+import { about, brand } from "@/app/content";
 
 export function About() {
-  const ring = `${about.watermark} · ${about.watermark} · `;
+  const ring = `${about.watermark} · ${brand.role.toUpperCase()}`;
 
   return (
-    <section id="o-mnie" aria-labelledby="o-mnie-title" className="bg-skora-2 pb-20 lg:pb-32">
-      <TensionLine from={0.06} to={0.04} seed={13} className="h-16 lg:h-24" />
-      <div className="container-site grid grid-cols-1 gap-14 pt-10 lg:grid-cols-12 lg:gap-8 lg:pt-14">
-        {/* Portret: prawdziwe zdjęcie w spokojnym kole, imię biegnie po okręgu */}
+    <section id="o-mnie" aria-labelledby="o-mnie-title" className="sheet bg-skora-2 pb-28 lg:pb-44">
+      <div className="container-site grid grid-cols-1 gap-14 pt-16 lg:grid-cols-12 lg:gap-8 lg:pt-24">
+        {/* Portret: prawdziwe zdjęcie w spokojnym kole. Głowa wychodzi ponad okrąg,
+            dół zdjęcia chowa się w łuku, a imię biegnie dolną krawędzią. */}
         <figure className="relative mx-auto w-full max-w-md lg:sticky lg:top-24 lg:col-span-5 lg:max-w-none lg:self-start">
           <div className="relative aspect-square">
             <svg viewBox="0 0 400 400" className="absolute inset-0 h-full w-full text-mut" aria-hidden="true">
               <defs>
-                <path id="okrag-imienia" d="M200 200m-182 0a182 182 0 1 1 364 0a182 182 0 1 1 -364 0" />
+                <path id="luk-imienia" d="M14 200a186 186 0 0 0 372 0" />
               </defs>
-              <text className="fill-current text-[15px] font-semibold tracking-[0.32em]">
-                <textPath href="#okrag-imienia">{ring}</textPath>
+              <text className="fill-current text-[14px] font-semibold tracking-[0.3em]">
+                <textPath href="#luk-imienia" startOffset="50%" textAnchor="middle">
+                  {ring}
+                </textPath>
               </text>
             </svg>
-            <div className="absolute inset-[11%] overflow-hidden rounded-full bg-brzoskwinia">
+            <div className="absolute inset-[11%] rounded-full bg-brzoskwinia" aria-hidden="true" />
+            <div className="absolute inset-x-[11%] bottom-[11%] top-[3%] overflow-hidden rounded-b-full">
               <Image
                 src="/olek.png"
                 alt={about.photoAlt}
                 fill
                 quality={80}
-                sizes="(min-width: 1024px) 32vw, 80vw"
-                className="translate-y-[6%] scale-110 object-contain object-bottom"
+                sizes="(min-width: 1024px) 24vw, 60vw"
+                className="object-contain object-bottom"
               />
             </div>
           </div>

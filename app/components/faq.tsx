@@ -1,13 +1,11 @@
 import Image from "next/image";
 import { cta, faq } from "@/app/content";
 import { Plus } from "@/app/components/icons";
-import { TensionLine } from "@/app/components/tension-line";
 
 export function Faq() {
   return (
-    <section id="faq" aria-labelledby="faq-title" className="pb-20 lg:pb-32">
-      <TensionLine from={0.04} to={0.025} seed={15} className="h-16 lg:h-24" />
-      <div className="container-site grid grid-cols-1 gap-12 pt-10 lg:grid-cols-12 lg:gap-8 lg:pt-14">
+    <section id="faq" aria-labelledby="faq-title" className="sheet bg-skora pb-28 lg:pb-44">
+      <div className="container-site grid grid-cols-1 gap-12 pt-16 lg:grid-cols-12 lg:gap-8 lg:pt-24">
         <div className="lg:sticky lg:top-24 lg:col-span-4 lg:self-start">
           <p className="tag">{faq.eyebrow}</p>
           <h2 id="faq-title" className="headline mt-5 text-h2">

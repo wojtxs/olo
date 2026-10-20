@@ -3,7 +3,6 @@ import { ViewTransition } from "react";
 import Link from "next/link";
 import { contact, meta, pricing } from "@/app/content";
 import { ArrowLeft, ArrowRight } from "@/app/components/icons";
-import { TensionLine } from "@/app/components/tension-line";
 
 export const metadata: Metadata = {
   title: meta.pricingTitle,
@@ -39,9 +38,7 @@ export default function CennikPage() {
           </header>
         </div>
 
-        <TensionLine from={0.3} to={0.08} seed={21} className="my-8 h-20 lg:h-28" />
-
-        <div className="container-site">
+        <div className="container-site mt-10 lg:mt-14">
           <nav aria-label={pricing.title} className="sticky top-0 z-30 -mx-[var(--gutter)] overflow-x-auto bg-skora px-[var(--gutter)] py-3">
             <ul className="flex gap-2">
               {pricing.categories.map((category) => (

@@ -30,6 +30,19 @@ const built = {
 // Teksty, które celowo zmieniły formę (nie treść) — wypisywane osobno.
 const intentional = new Map([
   ["cennik|Aleksander Pawłowski | Mobilny masażysta", "/cennik ma teraz własny, zaakceptowany title „Cennik | Aleksander Pawłowski”"],
+  // Teksty zastąpione nowymi informacjami z profilu na Facebooku (posty z 23 maja i 11 września 2026)
+  ["home|Mobilny masażysta. Student fizjoterapii. Koszykarz. Cały czas się uczę.", "zmienione na prośbę właściciela na podstawie profilu na Facebooku (X 2026)"],
+  ["home|Na co dzień jestem studentem 3 roku fizjoterapii na Akademii Medycznej Nauk Stosowanych i Holistycznych. Jestem osobą ambitną i zdyscyplinowaną, co potwierdza fakt posiadania stypendium rektora tejże uczelni 2 rok z rzędu. Dodatkowo w kontekście masażu opanowałem kurs kobido i cały rytuał kobido complex dzięki specjalnemu szkoleniu.", "zmienione na prośbę właściciela na podstawie profilu na Facebooku (X 2026)"],
+  ["home|Studiuję fizjoterapię w Akademii Medycznej Nauk Stosowanych i Holistycznych. Jestem też certyfikowanym technikiem masażystą. Wiedza z zajęć i codzienna praca z ludźmi pomagają mi rozwijać warsztat.", "zmienione na prośbę właściciela na podstawie profilu na Facebooku (X 2026)"],
+  ["home|Doświadczenie ruchowe", "zmienione na prośbę właściciela na podstawie profilu na Facebooku (X 2026)"],
+  ["home|Od dziecka gram w koszykówkę. Dobrze rozumiem, jak ciało reaguje na wysiłek, gdzie pojawiają się napięcia i jak można je skutecznie rozluźnić.", "zmienione na prośbę właściciela na podstawie profilu na Facebooku (X 2026)"],
+  ["home|Koszykarz", "zmienione na prośbę właściciela na podstawie profilu na Facebooku (X 2026)"],
+  ["home|Życiowa pasja", "zmienione na prośbę właściciela na podstawie profilu na Facebooku (X 2026)"],
+  ["home|Stały rozwój", "zmienione na prośbę właściciela na podstawie profilu na Facebooku (X 2026)"],
+  ["home|Kursy i szkolenia", "zmienione na prośbę właściciela na podstawie profilu na Facebooku (X 2026)"],
+  ["home|Wszystkie zabiegi dostosowuję do Twoich potrzeb. Niezależnie od tego, czy potrzebujesz głębokiego relaksu, czy szybkiej ulgi w napiętych partiach ciała.", "zmienione na prośbę właściciela na podstawie profilu na Facebooku (X 2026)"],
+  ["home|Na terenie Sochaczewa i najbliższych okolic. Jeśli mieszkasz trochę dalej, napisz i sprawdzimy, czy damy radę.", "zmienione na prośbę właściciela na podstawie profilu na Facebooku (X 2026)"],
+  ["home|Dojazd gratis", "zmienione na prośbę właściciela na podstawie profilu na Facebooku (X 2026)"],
 ]);
 
 const norm = (s) => s.replace(/\s+/g, " ").trim();

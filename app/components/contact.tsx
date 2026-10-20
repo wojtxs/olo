@@ -1,13 +1,11 @@
 import { contact, contactSection } from "@/app/content";
 import { AreaMap } from "@/app/components/area-map";
 import { ArrowRight } from "@/app/components/icons";
-import { TensionLine } from "@/app/components/tension-line";
 
 export function Contact() {
   return (
-    <section id="kontakt" aria-labelledby="kontakt-title" className="on-dark bg-wino pb-20 text-skora lg:pb-28">
-      <TensionLine from={0.025} to={0.01} seed={17} className="h-16 lg:h-24" />
-      <div className="container-site pt-10 lg:pt-14">
+    <section id="kontakt" aria-labelledby="kontakt-title" className="sheet on-dark bg-wino pb-20 text-skora lg:pb-28">
+      <div className="container-site pt-16 lg:pt-24">
         <p className="tag">{contactSection.eyebrow}</p>
         <h2 id="kontakt-title" className="headline mt-5 text-[clamp(2.5rem,0.5rem+10vw,11rem)]">
           {contactSection.title}

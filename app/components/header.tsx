@@ -3,6 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { brand, contact, cta, nav, ui } from "@/app/content";
+import { LogoMark } from "@/app/components/logo-mark";
 
 export function Header() {
   const [open, setOpen] = React.useState(false);
@@ -54,9 +55,12 @@ export function Header() {
         style={{ viewTransitionName: "site-header" }}
       >
         <div className="container-site flex h-16 items-center justify-between gap-6 lg:h-[4.5rem]">
-          <Link href="/" prefetch={false} className="flex flex-col leading-tight" onClick={close}>
-            <span className="text-[1.125rem] font-semibold tracking-[-0.02em]">{brand.name}</span>
-            <span className="text-[0.8125rem] text-mut">{brand.role}</span>
+          <Link href="/" prefetch={false} className="flex items-center gap-3" onClick={close}>
+            <LogoMark className="h-10 text-cegla" />
+            <span className="flex flex-col leading-tight">
+              <span className="text-[1.125rem] font-semibold tracking-[-0.02em]">{brand.name}</span>
+              <span className="text-[0.8125rem] text-mut">{brand.role}</span>
+            </span>
           </Link>
 
           <nav className="hidden items-center gap-1 lg:flex" aria-label="Nawigacja główna">

@@ -2,11 +2,10 @@ import Image from "next/image";
 import { cta, hero } from "@/app/content";
 import { ArrowRight } from "@/app/components/icons";
 import { HeroVideo } from "@/app/components/hero-video";
-import { TensionLine } from "@/app/components/tension-line";
 
 export function Hero() {
   return (
-    <section aria-labelledby="hero-title" className="relative overflow-hidden pb-16 lg:pb-24">
+    <section aria-labelledby="hero-title" className="relative overflow-hidden pb-24 lg:pb-36">
       <div className="container-site grid grid-cols-1 pt-6 lg:grid-cols-12 lg:gap-x-8 lg:pt-10">
         <div className="lg:col-span-7 lg:row-start-1">
           <p className="tag">{hero.eyebrow}</p>
@@ -15,18 +14,7 @@ export function Hero() {
           </h1>
         </div>
 
-        {/* Jedna linia przez całą stronę: tu jest najbardziej spięta i puszcza przy przewijaniu.
-            Na desktopie przecina też zdjęcie — napięcie przechodzi przez ciało. */}
-        <TensionLine
-          hero
-          from={1}
-          to={0.62}
-          height={180}
-          seed={3}
-          className="-mx-[var(--gutter)] my-6 h-24 lg:pointer-events-none lg:absolute lg:inset-x-0 lg:top-[44%] lg:z-10 lg:mx-0 lg:my-0 lg:h-44"
-        />
-
-        <div className="lg:col-span-6 lg:row-start-2 lg:self-end lg:pt-56">
+        <div className="mt-8 lg:col-span-6 lg:row-start-2 lg:mt-0 lg:self-end lg:pt-16">
           <p className="max-w-[36ch] text-lead text-mut">{hero.lead}</p>
           <div className="mt-8 flex flex-wrap items-center gap-3" data-hero-cta>
             <a href="#kontakt" className="btn btn-primary">
